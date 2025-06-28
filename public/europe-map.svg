@@ -1,0 +1,61 @@
+<svg viewBox="0 0 1000 800" xmlns="http://www.w3.org/2000/svg" class="europe-map">
+  <!-- Simplified Europe Map with Major Wine Countries -->
+  
+  <!-- France -->
+  <path id="France" class="country" d="M350 300 L450 280 L480 320 L460 380 L420 400 L370 390 L340 350 Z"/>
+  
+  <!-- Germany -->
+  <path id="Germany" class="country" d="M450 200 L550 190 L570 240 L540 280 L480 290 L450 250 Z"/>
+  
+  <!-- Italy -->
+  <path id="Italy" class="country" d="M480 350 L520 340 L550 380 L560 450 L540 520 L520 480 L490 420 L470 390 Z"/>
+  
+  <!-- Spain -->
+  <path id="Spain" class="country" d="M250 380 L350 360 L380 420 L360 480 L280 500 L240 450 Z"/>
+  
+  <!-- Portugal -->
+  <path id="Portugal" class="country" d="M200 400 L250 390 L260 450 L240 490 L200 480 Z"/>
+  
+  <!-- Greece -->
+  <path id="Greece" class="country" d="M600 450 L650 440 L670 480 L660 520 L620 510 L590 470 Z"/>
+  
+  <!-- Austria -->
+  <path id="Austria" class="country" d="M520 280 L580 270 L590 300 L560 320 L520 310 Z"/>
+  
+  <!-- Switzerland -->
+  <path id="Switzerland" class="country" d="M460 320 L500 310 L510 340 L480 350 Z"/>
+  
+  <!-- Hungary -->
+  <path id="Hungary" class="country" d="M580 300 L630 290 L640 330 L610 350 L580 340 Z"/>
+  
+  <!-- Romania -->
+  <path id="Romania" class="country" d="M630 280 L680 270 L700 320 L680 360 L640 350 L620 310 Z"/>
+  
+  <!-- Bulgaria -->
+  <path id="Bulgaria" class="country" d="M640 350 L690 340 L700 380 L670 400 L630 390 Z"/>
+  
+  <!-- Croatia -->
+  <path id="Croatia" class="country" d="M550 350 L590 340 L600 380 L570 400 L540 390 Z"/>
+  
+  <!-- Slovenia -->
+  <path id="Slovenia" class="country" d="M520 320 L550 310 L560 340 L530 350 Z"/>
+  
+  <!-- Czech Republic -->
+  <path id="Czech Republic" class="country" d="M530 240 L580 230 L590 270 L550 280 L520 270 Z"/>
+  
+  <!-- Country Labels -->
+  <text x="400" y="340" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">France</text>
+  <text x="500" y="240" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">Germany</text>
+  <text x="520" y="420" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">Italy</text>
+  <text x="315" y="430" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">Spain</text>
+  <text x="225" y="445" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">Portugal</text>
+  <text x="630" y="480" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">Greece</text>
+  <text x="550" y="295" text-anchor="middle" font-size="10" font-weight="bold" fill="#333">Austria</text>
+  <text x="480" y="335" text-anchor="middle" font-size="10" font-weight="bold" fill="#333">Switzerland</text>
+  <text x="605" y="320" text-anchor="middle" font-size="10" font-weight="bold" fill="#333">Hungary</text>
+  <text x="660" y="315" text-anchor="middle" font-size="10" font-weight="bold" fill="#333">Romania</text>
+  <text x="665" y="370" text-anchor="middle" font-size="10" font-weight="bold" fill="#333">Bulgaria</text>
+  <text x="570" y="370" text-anchor="middle" font-size="10" font-weight="bold" fill="#333">Croatia</text>
+  <text x="540" y="330" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">Slovenia</text>
+  <text x="555" y="255" text-anchor="middle" font-size="10" font-weight="bold" fill="#333">Czech Rep.</text>
+</svg>

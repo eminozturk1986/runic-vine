@@ -1,0 +1,541 @@
+/* Runic Vine - Wine-themed Game Styles */
+
+:root {
+    --primary-red: #891e19;
+    --primary-blue-gray: #2b3249;
+    --accent-yellow: #ffda00;
+    --white: #ffffff;
+    --light-gray: #f8f9fa;
+    --border-gray: #e9ecef;
+    
+    --font-body: 'Arimo', sans-serif;
+    --font-display: 'Arimo', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--primary-blue-gray);
+    background-color: var(--white);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+#app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background-color: var(--white);
+    padding: 2rem 1rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border-gray);
+}
+
+header h1 {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--primary-red);
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+main {
+    flex: 1;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+#game-container {
+    background-color: var(--light-gray);
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    color: var(--primary-red);
+    margin-bottom: 1rem;
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+p {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2.5rem;
+    }
+    
+    main {
+        padding: 1rem;
+    }
+    
+    #game-container {
+        padding: 1rem;
+    }
+}
+
+/* Start Screen Styles */
+.start-screen {
+    text-align: center;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.start-screen h2 {
+    color: var(--primary-red);
+    margin-bottom: 1rem;
+}
+
+.start-screen p {
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--primary-blue-gray);
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid var(--border-gray);
+    border-radius: 6px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--primary-red);
+}
+
+.btn {
+    background-color: var(--primary-red);
+    color: var(--white);
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 6px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #6d1713;
+}
+
+/* Game Screen Styles */
+.game-screen {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.question-section {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    background-color: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.grape-variety {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-red);
+    margin-bottom: 1rem;
+}
+
+.grape-description {
+    font-size: 1.1rem;
+    color: var(--primary-blue-gray);
+    opacity: 0.8;
+    font-style: italic;
+}
+
+.map-section {
+    text-align: center;
+    padding: 2rem;
+    background-color: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.map-title {
+    font-size: 1.5rem;
+    color: var(--primary-red);
+    margin-bottom: 1rem;
+}
+
+.map-container {
+    display: inline-block;
+    max-width: 100%;
+    background-color: var(--light-gray);
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.europe-map {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+}
+
+.country {
+    fill: #e9ecef;
+    stroke: #ffffff;
+    stroke-width: 1;
+    cursor: pointer;
+    transition: fill 0.3s ease;
+}
+
+.country:hover {
+    fill: var(--accent-yellow);
+}
+
+.country.selected {
+    fill: var(--primary-red);
+}
+
+.selection-info {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: var(--light-gray);
+    border-radius: 6px;
+    font-weight: 600;
+    color: var(--primary-blue-gray);
+}
+
+/* Timer Styles */
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background-color: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.timer-container {
+    text-align: center;
+}
+
+.timer-label {
+    font-size: 0.9rem;
+    color: var(--primary-blue-gray);
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+}
+
+.timer-display {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-red);
+    font-family: 'Courier New', monospace;
+}
+
+.timer-warning {
+    color: #ff9800 !important;
+}
+
+.timer-danger {
+    color: #f44336 !important;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+.score-container {
+    text-align: center;
+}
+
+.score-label {
+    font-size: 0.9rem;
+    color: var(--primary-blue-gray);
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+}
+
+.score-display {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-red);
+}
+
+/* Feedback Styles */
+.country.correct {
+    fill: #4caf50 !important;
+    stroke: #2e7d32;
+    stroke-width: 3;
+}
+
+.country.incorrect {
+    fill: #f44336 !important;
+    stroke: #c62828;
+    stroke-width: 3;
+}
+
+.feedback-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    font-size: 1.5rem;
+    font-weight: 700;
+    z-index: 1000;
+    text-align: center;
+}
+
+.feedback-correct {
+    color: #4caf50;
+    border: 3px solid #4caf50;
+}
+
+.feedback-incorrect {
+    color: #f44336;
+    border: 3px solid #f44336;
+}
+
+/* End Screen Styles */
+.end-screen {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.final-score {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--primary-red);
+    margin: 1rem 0;
+}
+
+.btn-secondary {
+    background-color: var(--primary-blue-gray);
+    color: var(--white);
+    margin-left: 1rem;
+}
+
+.btn-secondary:hover {
+    background-color: #1f2438;
+}
+
+/* Enhanced End Screen Styles */
+.final-score-section {
+    background-color: var(--white);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 2px solid var(--primary-red);
+}
+
+.player-name {
+    font-size: 1.5rem;
+    color: var(--primary-blue-gray);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.score-summary {
+    display: flex;
+    justify-content: space-around;
+    margin: 1.5rem 0;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.score-metric {
+    text-align: center;
+    padding: 1rem;
+    background-color: var(--light-gray);
+    border-radius: 8px;
+    min-width: 120px;
+}
+
+.score-metric-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-red);
+    display: block;
+}
+
+.score-metric-label {
+    font-size: 0.9rem;
+    color: var(--primary-blue-gray);
+    margin-top: 0.5rem;
+}
+
+/* Leaderboard Styles */
+.leaderboard-section {
+    background-color: var(--white);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.leaderboard-title {
+    font-size: 1.8rem;
+    color: var(--primary-red);
+    text-align: center;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--border-gray);
+    padding-bottom: 0.5rem;
+}
+
+.leaderboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.leaderboard-table th {
+    background-color: var(--primary-red);
+    color: var(--white);
+    padding: 1rem 0.75rem;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid var(--primary-blue-gray);
+}
+
+.leaderboard-table th:first-child {
+    border-radius: 8px 0 0 0;
+    text-align: center;
+    width: 60px;
+}
+
+.leaderboard-table th:last-child {
+    border-radius: 0 8px 0 0;
+}
+
+.leaderboard-table td {
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--border-gray);
+    color: var(--primary-blue-gray);
+}
+
+.leaderboard-table td:first-child {
+    text-align: center;
+    font-weight: 700;
+    color: var(--primary-red);
+}
+
+.leaderboard-table tr:nth-child(even) {
+    background-color: var(--light-gray);
+}
+
+.leaderboard-table tr:hover {
+    background-color: rgba(137, 30, 25, 0.05);
+}
+
+.rank-medal {
+    font-size: 1.2rem;
+}
+
+.rank-1 { color: #ffd700; }
+.rank-2 { color: #c0c0c0; }
+.rank-3 { color: #cd7f32; }
+
+.current-player-row {
+    background-color: rgba(137, 30, 25, 0.1) !important;
+    border: 2px solid var(--primary-red);
+}
+
+.current-player-row td {
+    font-weight: 600;
+}
+
+.no-scores {
+    text-align: center;
+    color: var(--primary-blue-gray);
+    opacity: 0.7;
+    padding: 2rem;
+    font-style: italic;
+}
+
+.game-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+    .grape-variety {
+        font-size: 2rem;
+    }
+    
+    .question-section, .map-section {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    header {
+        padding: 1.5rem 1rem;
+    }
+    
+    .grape-variety {
+        font-size: 1.5rem;
+    }
+}

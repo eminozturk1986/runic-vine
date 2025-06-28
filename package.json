@@ -1,0 +1,34 @@
+{
+  "name": "runic-vine",
+  "version": "1.0.0",
+  "description": "A web-based educational game where players match grape varieties to their countries of origin",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "node test/ui.test.js",
+    "start": "npx serve .",
+    "dev": "npx serve . --listen 8080"
+  },
+  "keywords": [
+    "game",
+    "education",
+    "wine",
+    "geography",
+    "quiz"
+  ],
+  "author": "Runic Vine Team",
+  "license": "MIT",
+  "devDependencies": {
+    "puppeteer": "^21.0.0"
+  },
+  "dependencies": {
+    "serve": "^14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/runic-vine.git"
+  },
+  "homepage": "https://your-username.github.io/runic-vine/",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
