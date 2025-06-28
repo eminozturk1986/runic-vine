@@ -1,0 +1,109 @@
+<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg" class="continent-map">
+  <!-- Detailed Europe Map with proper country shapes -->
+  
+  <!-- France -->
+  <path id="France" class="country" d="M380 320 L420 310 L440 290 L460 300 L480 320 L500 340 L520 350 L530 370 L520 390 L500 410 L480 420 L460 430 L440 440 L420 430 L400 420 L380 400 L370 380 L360 360 L370 340 Z"/>
+  
+  <!-- Germany -->
+  <path id="Germany" class="country" d="M520 280 L540 270 L560 260 L580 270 L600 280 L620 290 L630 310 L620 330 L610 350 L590 360 L570 350 L550 340 L530 330 L520 310 Z"/>
+  
+  <!-- Italy -->
+  <path id="Italy" class="country" d="M560 380 L580 370 L600 380 L620 390 L640 410 L650 440 L660 470 L650 500 L640 530 L630 560 L620 580 L600 570 L580 560 L570 540 L560 520 L550 500 L540 480 L530 460 L540 440 L550 420 L560 400 Z"/>
+  
+  <!-- Spain -->
+  <path id="Spain" class="country" d="M280 380 L320 370 L360 380 L400 390 L440 400 L480 410 L520 420 L530 440 L520 460 L500 480 L480 500 L440 510 L400 520 L360 510 L320 500 L280 490 L240 480 L220 460 L230 440 L250 420 L270 400 Z"/>
+  
+  <!-- Portugal -->
+  <path id="Portugal" class="country" d="M200 410 L240 400 L280 410 L290 430 L280 450 L270 470 L260 490 L250 510 L230 520 L210 510 L190 490 L180 470 L190 450 L200 430 Z"/>
+  
+  <!-- United Kingdom -->
+  <path id="United Kingdom" class="country" d="M320 180 L340 170 L360 160 L380 170 L400 180 L420 190 L430 210 L420 230 L400 240 L380 250 L360 240 L340 230 L320 220 L300 210 L290 190 L300 170 L310 160 Z M400 140 L420 130 L440 140 L450 160 L440 180 L420 190 L400 180 L380 170 L390 150 Z"/>
+  
+  <!-- Poland -->
+  <path id="Poland" class="country" d="M620 260 L640 250 L660 240 L680 250 L700 260 L720 270 L730 290 L720 310 L710 330 L690 340 L670 330 L650 320 L630 310 L620 290 Z"/>
+  
+  <!-- Greece -->
+  <path id="Greece" class="country" d="M640 480 L660 470 L680 480 L700 490 L720 500 L730 520 L720 540 L700 550 L680 560 L660 550 L640 540 L620 530 L610 510 L620 490 Z"/>
+  
+  <!-- Norway -->
+  <path id="Norway" class="country" d="M520 80 L540 70 L560 60 L580 70 L600 80 L620 90 L640 100 L650 120 L640 140 L630 160 L620 180 L600 190 L580 200 L560 190 L540 180 L520 170 L500 160 L490 140 L500 120 L510 100 Z"/>
+  
+  <!-- Sweden -->
+  <path id="Sweden" class="country" d="M580 100 L600 90 L620 100 L640 110 L660 120 L680 130 L690 150 L680 170 L670 190 L650 200 L630 210 L610 200 L590 190 L580 170 L570 150 L580 130 Z"/>
+  
+  <!-- Finland -->
+  <path id="Finland" class="country" d="M680 90 L700 80 L720 90 L740 100 L760 110 L780 120 L790 140 L780 160 L770 180 L750 190 L730 200 L710 190 L690 180 L680 160 L670 140 L680 120 Z"/>
+  
+  <!-- Austria -->
+  <path id="Austria" class="country" d="M560 340 L580 330 L600 320 L620 330 L640 340 L650 350 L640 360 L620 370 L600 360 L580 350 L560 360 Z"/>
+  
+  <!-- Switzerland -->
+  <path id="Switzerland" class="country" d="M500 350 L520 340 L540 350 L550 360 L540 370 L520 380 L500 370 L480 360 L490 350 Z"/>
+  
+  <!-- Netherlands -->
+  <path id="Netherlands" class="country" d="M480 240 L500 230 L520 240 L530 250 L520 260 L500 270 L480 260 L470 250 Z"/>
+  
+  <!-- Belgium -->
+  <path id="Belgium" class="country" d="M460 260 L480 250 L500 260 L510 270 L500 280 L480 290 L460 280 L450 270 Z"/>
+  
+  <!-- Czech Republic -->
+  <path id="Czech Republic" class="country" d="M580 300 L600 290 L620 300 L630 310 L620 320 L600 330 L580 320 L570 310 Z"/>
+  
+  <!-- Hungary -->
+  <path id="Hungary" class="country" d="M640 340 L660 330 L680 340 L700 350 L710 360 L700 370 L680 380 L660 370 L640 360 Z"/>
+  
+  <!-- Romania -->
+  <path id="Romania" class="country" d="M700 320 L720 310 L740 320 L760 330 L770 350 L760 370 L740 380 L720 370 L700 360 L690 340 Z"/>
+  
+  <!-- Bulgaria -->
+  <path id="Bulgaria" class="country" d="M680 380 L700 370 L720 380 L740 390 L750 410 L740 430 L720 440 L700 430 L680 420 L670 400 Z"/>
+  
+  <!-- Croatia -->
+  <path id="Croatia" class="country" d="M600 380 L620 370 L640 380 L660 390 L670 410 L660 430 L640 440 L620 430 L600 420 L580 410 L590 390 Z"/>
+  
+  <!-- Serbia -->
+  <path id="Serbia" class="country" d="M660 400 L680 390 L700 400 L710 420 L700 440 L680 450 L660 440 L650 420 Z"/>
+  
+  <!-- Slovenia -->
+  <path id="Slovenia" class="country" d="M580 360 L600 350 L620 360 L630 370 L620 380 L600 390 L580 380 L570 370 Z"/>
+  
+  <!-- Slovakia -->
+  <path id="Slovakia" class="country" d="M620 310 L640 300 L660 310 L680 320 L690 330 L680 340 L660 350 L640 340 L620 330 Z"/>
+  
+  <!-- Denmark -->
+  <path id="Denmark" class="country" d="M520 200 L540 190 L560 200 L570 220 L560 240 L540 250 L520 240 L510 220 Z"/>
+  
+  <!-- Ireland -->
+  <path id="Ireland" class="country" d="M260 200 L280 190 L300 200 L310 220 L300 240 L280 250 L260 240 L250 220 Z"/>
+  
+  <!-- Iceland -->
+  <path id="Iceland" class="country" d="M180 120 L200 110 L220 120 L230 140 L220 160 L200 170 L180 160 L170 140 Z"/>
+  
+  <!-- Country Labels -->
+  <text x="450" y="370" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">France</text>
+  <text x="570" y="310" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">Germany</text>
+  <text x="600" y="480" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">Italy</text>
+  <text x="360" y="450" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">Spain</text>
+  <text x="235" y="465" text-anchor="middle" font-size="10" font-weight="bold" fill="#333">Portugal</text>
+  <text x="365" y="205" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">UK</text>
+  <text x="675" y="295" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">Poland</text>
+  <text x="675" y="515" text-anchor="middle" font-size="10" font-weight="bold" fill="#333">Greece</text>
+  <text x="570" y="125" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">Norway</text>
+  <text x="635" y="155" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">Sweden</text>
+  <text x="735" y="145" text-anchor="middle" font-size="10" font-weight="bold" fill="#333">Finland</text>
+  <text x="600" y="350" text-anchor="middle" font-size="9" font-weight="bold" fill="#333">Austria</text>
+  <text x="515" y="365" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">CH</text>
+  <text x="500" y="250" text-anchor="middle" font-size="9" font-weight="bold" fill="#333">NL</text>
+  <text x="480" y="275" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">BE</text>
+  <text x="600" y="315" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">CZ</text>
+  <text x="675" y="355" text-anchor="middle" font-size="9" font-weight="bold" fill="#333">Hungary</text>
+  <text x="730" y="350" text-anchor="middle" font-size="10" font-weight="bold" fill="#333">Romania</text>
+  <text x="715" y="410" text-anchor="middle" font-size="9" font-weight="bold" fill="#333">Bulgaria</text>
+  <text x="630" y="405" text-anchor="middle" font-size="9" font-weight="bold" fill="#333">Croatia</text>
+  <text x="680" y="420" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">Serbia</text>
+  <text x="600" y="375" text-anchor="middle" font-size="7" font-weight="bold" fill="#333">SL</text>
+  <text x="650" y="325" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">SK</text>
+  <text x="545" y="220" text-anchor="middle" font-size="9" font-weight="bold" fill="#333">Denmark</text>
+  <text x="280" y="220" text-anchor="middle" font-size="10" font-weight="bold" fill="#333">Ireland</text>
+  <text x="200" y="145" text-anchor="middle" font-size="9" font-weight="bold" fill="#333">Iceland</text>
+</svg>

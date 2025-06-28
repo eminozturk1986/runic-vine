@@ -143,16 +143,85 @@ class RunicVineApp {
             </div>
         `;
 
-        await this.loadEuropeMap();
+        // Load appropriate continent map based on grape
+        const continent = this.getGrapeContinent(this.currentGrape);
+        await this.loadContinentMap(continent);
         this.updateTimerDisplay();
     }
 
-    async loadEuropeMap() {
+    getGrapeContinent(grape) {
+        const continentMap = {
+            // Europe
+            'France': 'europe',
+            'Germany': 'europe', 
+            'Italy': 'europe',
+            'Spain': 'europe',
+            'Portugal': 'europe',
+            'Greece': 'europe',
+            'Austria': 'europe',
+            'Switzerland': 'europe',
+            'Hungary': 'europe',
+            'Romania': 'europe',
+            'Bulgaria': 'europe',
+            'Croatia': 'europe',
+            'Slovenia': 'europe',
+            'Slovakia': 'europe',
+            'Czech Republic': 'europe',
+            'Poland': 'europe',
+            'United Kingdom': 'europe',
+            'Ireland': 'europe',
+            'Netherlands': 'europe',
+            'Belgium': 'europe',
+            'Denmark': 'europe',
+            'Sweden': 'europe',
+            'Norway': 'europe',
+            'Finland': 'europe',
+            'Iceland': 'europe',
+            'Serbia': 'europe',
+            
+            // North America
+            'United States': 'north-america',
+            'Canada': 'north-america',
+            'Mexico': 'north-america',
+            
+            // South America
+            'Argentina': 'south-america',
+            'Chile': 'south-america',
+            'Brazil': 'south-america',
+            'Colombia': 'south-america',
+            'Peru': 'south-america',
+            'Venezuela': 'south-america',
+            'Ecuador': 'south-america',
+            'Bolivia': 'south-america',
+            'Uruguay': 'south-america',
+            
+            // Oceania
+            'Australia': 'oceania',
+            'New Zealand': 'oceania',
+            
+            // Africa
+            'South Africa': 'africa',
+            
+            // Asia
+            'Georgia': 'asia'
+        };
+        
+        return continentMap[grape.country] || 'europe'; // Default to Europe
+    }
+
+    async loadContinentMap(continent) {
         try {
-            const response = await fetch('./public/europe-map.svg');
-            if (!response.ok) {
-                throw new Error('Failed to load Europe map');
+            // Try detailed version first for Europe, then fallback to regular
+            let mapFile = `./public/maps/${continent}.svg`;
+            if (continent === 'europe') {
+                mapFile = `./public/maps/${continent}-detailed.svg`;
             }
+            
+            const response = await fetch(mapFile);
+            if (!response.ok) {
+                throw new Error(`Failed to load ${continent} map`);
+            }
+            
             const svgText = await response.text();
             
             const mapPlaceholder = document.getElementById('map-placeholder');
@@ -162,9 +231,9 @@ class RunicVineApp {
             this.setupMapInteraction();
             
         } catch (error) {
-            console.error('Error loading map:', error);
+            console.error(`Error loading ${continent} map:`, error);
             document.getElementById('map-placeholder').innerHTML = `
-                <p style="color: var(--primary-red);">Failed to load map. Please refresh the page.</p>
+                <p style="color: var(--primary-red);">Failed to load ${continent} map. Please refresh the page.</p>
             `;
         }
     }

@@ -1,0 +1,65 @@
+<svg viewBox="0 0 800 1000" xmlns="http://www.w3.org/2000/svg" class="continent-map">
+  <!-- Africa Map -->
+  
+  <!-- South Africa -->
+  <path id="South Africa" class="country" d="M350 850 L400 840 L450 850 L500 860 L530 880 L520 900 L500 920 L480 940 L450 950 L420 960 L390 950 L360 940 L340 920 L330 900 L340 880 L350 860 Z"/>
+  
+  <!-- Morocco -->
+  <path id="Morocco" class="country" d="M280 200 L320 190 L360 200 L380 220 L370 240 L350 260 L320 270 L290 260 L270 240 L270 220 Z"/>
+  
+  <!-- Algeria -->
+  <path id="Algeria" class="country" d="M320 240 L360 230 L400 240 L440 250 L460 270 L450 290 L430 310 L400 320 L370 310 L340 300 L320 280 L310 260 Z"/>
+  
+  <!-- Tunisia -->
+  <path id="Tunisia" class="country" d="M420 220 L440 210 L460 220 L470 240 L460 260 L440 270 L420 260 L410 240 Z"/>
+  
+  <!-- Libya -->
+  <path id="Libya" class="country" d="M400 260 L440 250 L480 260 L520 270 L540 290 L530 310 L510 330 L480 340 L450 330 L420 320 L400 300 L390 280 Z"/>
+  
+  <!-- Egypt -->
+  <path id="Egypt" class="country" d="M480 280 L520 270 L560 280 L580 300 L570 320 L550 340 L520 350 L490 340 L470 320 L470 300 Z"/>
+  
+  <!-- Nigeria -->
+  <path id="Nigeria" class="country" d="M320 450 L360 440 L400 450 L420 470 L410 490 L390 510 L360 520 L330 510 L310 490 L310 470 Z"/>
+  
+  <!-- Ethiopia -->
+  <path id="Ethiopia" class="country" d="M520 500 L560 490 L600 500 L620 520 L610 540 L590 560 L560 570 L530 560 L510 540 L510 520 Z"/>
+  
+  <!-- Kenya -->
+  <path id="Kenya" class="country" d="M540 580 L580 570 L620 580 L630 600 L620 620 L600 640 L570 650 L540 640 L520 620 L520 600 Z"/>
+  
+  <!-- Tanzania -->
+  <path id="Tanzania" class="country" d="M520 640 L560 630 L600 640 L620 660 L610 680 L590 700 L560 710 L530 700 L510 680 L500 660 Z"/>
+  
+  <!-- Democratic Republic of Congo -->
+  <path id="Democratic Republic of Congo" class="country" d="M380 580 L420 570 L460 580 L500 590 L520 610 L510 630 L490 650 L460 660 L430 650 L400 640 L370 630 L360 610 L360 590 Z"/>
+  
+  <!-- Angola -->
+  <path id="Angola" class="country" d="M360 700 L400 690 L440 700 L460 720 L450 740 L430 760 L400 770 L370 760 L350 740 L340 720 Z"/>
+  
+  <!-- Zimbabwe -->
+  <path id="Zimbabwe" class="country" d="M460 780 L500 770 L540 780 L550 800 L540 820 L520 840 L490 850 L460 840 L440 820 L440 800 Z"/>
+  
+  <!-- Botswana -->
+  <path id="Botswana" class="country" d="M420 820 L460 810 L500 820 L520 840 L510 860 L490 880 L460 890 L430 880 L410 860 L400 840 Z"/>
+  
+  <!-- Namibia -->
+  <path id="Namibia" class="country" d="M360 780 L400 770 L440 780 L460 800 L450 820 L430 840 L400 850 L370 840 L350 820 L340 800 Z"/>
+  
+  <!-- Country Labels -->
+  <text x="425" y="905" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">South Africa</text>
+  <text x="325" y="235" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">Morocco</text>
+  <text x="380" y="285" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">Algeria</text>
+  <text x="440" y="245" text-anchor="middle" font-size="10" font-weight="bold" fill="#333">Tunisia</text>
+  <text x="465" y="315" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">Libya</text>
+  <text x="525" y="315" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">Egypt</text>
+  <text x="365" y="480" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">Nigeria</text>
+  <text x="565" y="535" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">Ethiopia</text>
+  <text x="575" y="615" text-anchor="middle" font-size="10" font-weight="bold" fill="#333">Kenya</text>
+  <text x="565" y="675" text-anchor="middle" font-size="10" font-weight="bold" fill="#333">Tanzania</text>
+  <text x="440" y="620" text-anchor="middle" font-size="9" font-weight="bold" fill="#333">DRC</text>
+  <text x="405" y="735" text-anchor="middle" font-size="10" font-weight="bold" fill="#333">Angola</text>
+  <text x="495" y="815" text-anchor="middle" font-size="9" font-weight="bold" fill="#333">Zimbabwe</text>
+  <text x="465" y="855" text-anchor="middle" font-size="9" font-weight="bold" fill="#333">Botswana</text>
+  <text x="405" y="815" text-anchor="middle" font-size="10" font-weight="bold" fill="#333">Namibia</text>
+</svg>
