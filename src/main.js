@@ -145,6 +145,7 @@ class RunicVineApp {
 
         // Load appropriate continent map based on grape
         const continent = this.getGrapeContinent(this.currentGrape);
+        console.log(`Loading ${continent} map for ${this.currentGrape.variety} from ${this.currentGrape.country}`);
         await this.loadContinentMap(continent);
         this.updateTimerDisplay();
     }
@@ -287,8 +288,8 @@ class RunicVineApp {
         console.log('Score:', this.score, '/', this.totalQuestions);
         
         // Load next question after delay
-        this.feedbackTimeout = setTimeout(() => {
-            this.nextQuestion();
+        this.feedbackTimeout = setTimeout(async () => {
+            await this.nextQuestion();
         }, 1500);
     }
 
@@ -312,7 +313,7 @@ class RunicVineApp {
         }, 1200);
     }
 
-    nextQuestion() {
+    async nextQuestion() {
         if (this.gameState !== 'playing') return;
         
         // Clear feedback timeout
@@ -329,10 +330,10 @@ class RunicVineApp {
             grapeVariety.textContent = this.currentGrape.variety;
         }
         
-        // Clear map selections
-        document.querySelectorAll('.country').forEach(c => {
-            c.classList.remove('correct', 'incorrect', 'selected');
-        });
+        // Load appropriate continent map for the new grape
+        const continent = this.getGrapeContinent(this.currentGrape);
+        console.log(`Loading ${continent} map for next question: ${this.currentGrape.variety} from ${this.currentGrape.country}`);
+        await this.loadContinentMap(continent);
         
         this.selectedCountry = null;
     }
