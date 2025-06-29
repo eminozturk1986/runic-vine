@@ -127,7 +127,10 @@ class RunicVineApp {
                 </div>
 
                 <div class="question-section">
-                    <div class="grape-variety">${this.currentGrape.variety}</div>
+                    <div class="grape-variety">
+                        ${this.getGrapeIcon(this.currentGrape.color)}
+                        ${this.currentGrape.variety}
+                    </div>
                     <div class="grape-description">
                         This is a placeholder description for the grape variety. 
                         The actual description will be added in a future update.
@@ -568,6 +571,16 @@ class RunicVineApp {
         this.selectRandomGrape();
         this.renderGameScreen();
         this.startTimer();
+    }
+
+    getGrapeIcon(color) {
+        const iconPaths = {
+            'red': 'icons/grape-red.svg',
+            'white': 'icons/grape-yellow.svg',
+            'pink': 'icons/grape-pink.svg'
+        };
+        const iconPath = iconPaths[color] || iconPaths['red'];
+        return `<img src="${iconPath}" alt="${color} grape" class="grape-icon" />`;
     }
 
     renderError() {

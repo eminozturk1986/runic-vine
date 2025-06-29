@@ -1,0 +1,21 @@
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <g fill="#8B0000">
+    <!-- Grape cluster -->
+    <circle cx="16" cy="6" r="2.5"/>
+    <circle cx="13" cy="9" r="2.5"/>
+    <circle cx="19" cy="9" r="2.5"/>
+    <circle cx="11" cy="12" r="2.5"/>
+    <circle cx="16" cy="12" r="2.5"/>
+    <circle cx="21" cy="12" r="2.5"/>
+    <circle cx="13" cy="15" r="2.5"/>
+    <circle cx="19" cy="15" r="2.5"/>
+    <circle cx="11" cy="18" r="2.5"/>
+    <circle cx="16" cy="18" r="2.5"/>
+    <circle cx="21" cy="18" r="2.5"/>
+    <circle cx="13" cy="21" r="2.5"/>
+    <circle cx="19" cy="21" r="2.5"/>
+    <circle cx="16" cy="24" r="2.5"/>
+  </g>
+  <!-- Grape leaf -->
+  <path d="M16 4 Q12 2 8 4 Q6 6 8 8 Q12 6 16 4 Z" fill="#228B22"/>
+</svg>

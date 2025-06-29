@@ -1,410 +1,512 @@
 [
   {
     "variety": "Cabernet Sauvignon",
-    "country": "France"
+    "country": "France",
+    "color": "red"
   },
   {
     "variety": "Chardonnay",
-    "country": "France"
+    "country": "France",
+    "color": "white"
   },
   {
     "variety": "Pinot Noir",
-    "country": "France"
+    "country": "France",
+    "color": "red"
   },
   {
     "variety": "Sauvignon Blanc",
-    "country": "France"
+    "country": "France",
+    "color": "white"
   },
   {
     "variety": "Merlot",
-    "country": "France"
+    "country": "France",
+    "color": "red"
   },
   {
     "variety": "Syrah",
-    "country": "France"
+    "country": "France",
+    "color": "red"
   },
   {
     "variety": "Riesling",
-    "country": "Germany"
+    "country": "Germany",
+    "color": "white"
   },
   {
-    "variety": "Gewürztraminer",
-    "country": "Germany"
+    "variety": "Gew\u00fcrztraminer",
+    "country": "Germany",
+    "color": "white"
   },
   {
     "variety": "Pinot Grigio",
-    "country": "Italy"
+    "country": "Italy",
+    "color": "white"
   },
   {
     "variety": "Sangiovese",
-    "country": "Italy"
+    "country": "Italy",
+    "color": "red"
   },
   {
     "variety": "Nebbiolo",
-    "country": "Italy"
+    "country": "Italy",
+    "color": "red"
   },
   {
     "variety": "Barbera",
-    "country": "Italy"
+    "country": "Italy",
+    "color": "red"
   },
   {
     "variety": "Tempranillo",
-    "country": "Spain"
+    "country": "Spain",
+    "color": "red"
   },
   {
-    "variety": "Albariño",
-    "country": "Spain"
+    "variety": "Albari\u00f1o",
+    "country": "Spain",
+    "color": "white"
   },
   {
     "variety": "Grenache",
-    "country": "Spain"
+    "country": "Spain",
+    "color": "red"
   },
   {
     "variety": "Monastrell",
-    "country": "Spain"
+    "country": "Spain",
+    "color": "red"
   },
   {
     "variety": "Zinfandel",
-    "country": "United States"
+    "country": "United States",
+    "color": "red"
   },
   {
     "variety": "Petite Sirah",
-    "country": "United States"
+    "country": "United States",
+    "color": "red"
   },
   {
     "variety": "Chenin Blanc",
-    "country": "South Africa"
+    "country": "South Africa",
+    "color": "white"
   },
   {
     "variety": "Pinotage",
-    "country": "South Africa"
+    "country": "South Africa",
+    "color": "red"
   },
   {
     "variety": "Shiraz",
-    "country": "Australia"
+    "country": "Australia",
+    "color": "red"
   },
   {
     "variety": "Semillon",
-    "country": "Australia"
+    "country": "Australia",
+    "color": "white"
   },
   {
     "variety": "Verdelho",
-    "country": "Portugal"
+    "country": "Portugal",
+    "color": "white"
   },
   {
     "variety": "Touriga Nacional",
-    "country": "Portugal"
+    "country": "Portugal",
+    "color": "red"
   },
   {
-    "variety": "Grüner Veltliner",
-    "country": "Austria"
+    "variety": "Gr\u00fcner Veltliner",
+    "country": "Austria",
+    "color": "white"
   },
   {
-    "variety": "Blaufränkisch",
-    "country": "Austria"
+    "variety": "Blaufr\u00e4nkisch",
+    "country": "Austria",
+    "color": "red"
   },
   {
     "variety": "Zweigelt",
-    "country": "Austria"
+    "country": "Austria",
+    "color": "red"
   },
   {
     "variety": "Assyrtiko",
-    "country": "Greece"
+    "country": "Greece",
+    "color": "white"
   },
   {
     "variety": "Agiorgitiko",
-    "country": "Greece"
+    "country": "Greece",
+    "color": "red"
   },
   {
     "variety": "Xinomavro",
-    "country": "Greece"
+    "country": "Greece",
+    "color": "red"
   },
   {
-    "variety": "Fetească Albă",
-    "country": "Romania"
+    "variety": "Feteasc\u0103 Alb\u0103",
+    "country": "Romania",
+    "color": "white"
   },
   {
-    "variety": "Fetească Neagră",
-    "country": "Romania"
+    "variety": "Feteasc\u0103 Neagr\u0103",
+    "country": "Romania",
+    "color": "red"
   },
   {
     "variety": "Kadarka",
-    "country": "Hungary"
+    "country": "Hungary",
+    "color": "red"
   },
   {
     "variety": "Furmint",
-    "country": "Hungary"
+    "country": "Hungary",
+    "color": "white"
   },
   {
-    "variety": "Hárslevelű",
-    "country": "Hungary"
+    "variety": "H\u00e1rslevel\u0171",
+    "country": "Hungary",
+    "color": "white"
   },
   {
-    "variety": "Müller-Thurgau",
-    "country": "Germany"
+    "variety": "M\u00fcller-Thurgau",
+    "country": "Germany",
+    "color": "white"
   },
   {
     "variety": "Silvaner",
-    "country": "Germany"
+    "country": "Germany",
+    "color": "white"
   },
   {
-    "variety": "Spätburgunder",
-    "country": "Germany"
+    "variety": "Sp\u00e4tburgunder",
+    "country": "Germany",
+    "color": "red"
   },
   {
     "variety": "Lemberger",
-    "country": "Germany"
+    "country": "Germany",
+    "color": "red"
   },
   {
     "variety": "Prosecco",
-    "country": "Italy"
+    "country": "Italy",
+    "color": "white"
   },
   {
     "variety": "Corvina",
-    "country": "Italy"
+    "country": "Italy",
+    "color": "red"
   },
   {
     "variety": "Montepulciano",
-    "country": "Italy"
+    "country": "Italy",
+    "color": "red"
   },
   {
     "variety": "Vermentino",
-    "country": "Italy"
+    "country": "Italy",
+    "color": "white"
   },
   {
     "variety": "Fiano",
-    "country": "Italy"
+    "country": "Italy",
+    "color": "white"
   },
   {
     "variety": "Aglianico",
-    "country": "Italy"
+    "country": "Italy",
+    "color": "red"
   },
   {
     "variety": "Verdejo",
-    "country": "Spain"
+    "country": "Spain",
+    "color": "white"
   },
   {
     "variety": "Godello",
-    "country": "Spain"
+    "country": "Spain",
+    "color": "white"
   },
   {
-    "variety": "Mencía",
-    "country": "Spain"
+    "variety": "Menc\u00eda",
+    "country": "Spain",
+    "color": "red"
   },
   {
     "variety": "Bobal",
-    "country": "Spain"
+    "country": "Spain",
+    "color": "red"
   },
   {
-    "variety": "Carmenère",
-    "country": "Chile"
+    "variety": "Carmen\u00e8re",
+    "country": "Chile",
+    "color": "red"
   },
   {
     "variety": "Pais",
-    "country": "Chile"
+    "country": "Chile",
+    "color": "red"
   },
   {
     "variety": "Malbec",
-    "country": "Argentina"
+    "country": "Argentina",
+    "color": "red"
   },
   {
-    "variety": "Torrontés",
-    "country": "Argentina"
+    "variety": "Torront\u00e9s",
+    "country": "Argentina",
+    "color": "white"
   },
   {
     "variety": "Bonarda",
-    "country": "Argentina"
+    "country": "Argentina",
+    "color": "red"
   },
   {
     "variety": "Tannat",
-    "country": "Uruguay"
+    "country": "Uruguay",
+    "color": "red"
   },
   {
-    "variety": "Castelão",
-    "country": "Portugal"
+    "variety": "Castel\u00e3o",
+    "country": "Portugal",
+    "color": "red"
   },
   {
     "variety": "Arinto",
-    "country": "Portugal"
+    "country": "Portugal",
+    "color": "white"
   },
   {
     "variety": "Baga",
-    "country": "Portugal"
+    "country": "Portugal",
+    "color": "red"
   },
   {
     "variety": "Moschofilero",
-    "country": "Greece"
+    "country": "Greece",
+    "color": "white"
   },
   {
     "variety": "Roditis",
-    "country": "Greece"
+    "country": "Greece",
+    "color": "white"
   },
   {
     "variety": "Mavrodaphne",
-    "country": "Greece"
+    "country": "Greece",
+    "color": "red"
   },
   {
     "variety": "Rkatiteli",
-    "country": "Georgia"
+    "country": "Georgia",
+    "color": "white"
   },
   {
     "variety": "Saperavi",
-    "country": "Georgia"
+    "country": "Georgia",
+    "color": "red"
   },
   {
     "variety": "Rkatsiteli",
-    "country": "Georgia"
+    "country": "Georgia",
+    "color": "white"
   },
   {
     "variety": "Mtsvane",
-    "country": "Georgia"
+    "country": "Georgia",
+    "color": "white"
   },
   {
     "variety": "Kisi",
-    "country": "Georgia"
+    "country": "Georgia",
+    "color": "white"
   },
   {
     "variety": "Chinuri",
-    "country": "Georgia"
+    "country": "Georgia",
+    "color": "white"
   },
   {
     "variety": "Tavkveri",
-    "country": "Georgia"
+    "country": "Georgia",
+    "color": "red"
   },
   {
     "variety": "Ojaleshi",
-    "country": "Georgia"
+    "country": "Georgia",
+    "color": "red"
   },
   {
     "variety": "Viognier",
-    "country": "France"
+    "country": "France",
+    "color": "white"
   },
   {
     "variety": "Marselan",
-    "country": "France"
+    "country": "France",
+    "color": "red"
   },
   {
     "variety": "Petit Verdot",
-    "country": "France"
+    "country": "France",
+    "color": "red"
   },
   {
     "variety": "Muscadet",
-    "country": "France"
+    "country": "France",
+    "color": "white"
   },
   {
     "variety": "Gamay",
-    "country": "France"
+    "country": "France",
+    "color": "red"
   },
   {
-    "variety": "Mourvèdre",
-    "country": "France"
+    "variety": "Mourv\u00e8dre",
+    "country": "France",
+    "color": "pink"
   },
   {
     "variety": "Cinsaut",
-    "country": "France"
+    "country": "France",
+    "color": "red"
   },
   {
     "variety": "Carignan",
-    "country": "France"
+    "country": "France",
+    "color": "red"
   },
   {
     "variety": "Colombard",
-    "country": "France"
+    "country": "France",
+    "color": "white"
   },
   {
     "variety": "Marsanne",
-    "country": "France"
+    "country": "France",
+    "color": "white"
   },
   {
     "variety": "Roussanne",
-    "country": "France"
+    "country": "France",
+    "color": "white"
   },
   {
     "variety": "Picpoul",
-    "country": "France"
+    "country": "France",
+    "color": "white"
   },
   {
     "variety": "Meunier",
-    "country": "France"
+    "country": "France",
+    "color": "red"
   },
   {
-    "variety": "Aligoté",
-    "country": "France"
+    "variety": "Aligot\u00e9",
+    "country": "France",
+    "color": "white"
   },
   {
-    "variety": "Jacquère",
-    "country": "France"
+    "variety": "Jacqu\u00e8re",
+    "country": "France",
+    "color": "white"
   },
   {
     "variety": "Trousseau",
-    "country": "France"
+    "country": "France",
+    "color": "red"
   },
   {
     "variety": "Poulsard",
-    "country": "France"
+    "country": "France",
+    "color": "red"
   },
   {
     "variety": "Chasselas",
-    "country": "Switzerland"
+    "country": "Switzerland",
+    "color": "white"
   },
   {
     "variety": "Petite Arvine",
-    "country": "Switzerland"
+    "country": "Switzerland",
+    "color": "white"
   },
   {
     "variety": "Humagne Rouge",
-    "country": "Switzerland"
+    "country": "Switzerland",
+    "color": "red"
   },
   {
     "variety": "Pinot Blanc",
-    "country": "France"
+    "country": "France",
+    "color": "white"
   },
   {
-    "variety": "Côt",
-    "country": "France"
+    "variety": "C\u00f4t",
+    "country": "France",
+    "color": "red"
   },
   {
     "variety": "Loureiro",
-    "country": "Portugal"
+    "country": "Portugal",
+    "color": "white"
   },
   {
     "variety": "Alvarinho",
-    "country": "Portugal"
+    "country": "Portugal",
+    "color": "white"
   },
   {
     "variety": "Trincadeira",
-    "country": "Portugal"
+    "country": "Portugal",
+    "color": "red"
   },
   {
     "variety": "Tinta Roriz",
-    "country": "Portugal"
+    "country": "Portugal",
+    "color": "red"
   },
   {
-    "variety": "Fernão Pires",
-    "country": "Portugal"
+    "variety": "Fern\u00e3o Pires",
+    "country": "Portugal",
+    "color": "white"
   },
   {
     "variety": "Encruzado",
-    "country": "Portugal"
+    "country": "Portugal",
+    "color": "white"
   },
   {
     "variety": "Bical",
-    "country": "Portugal"
+    "country": "Portugal",
+    "color": "white"
   },
   {
     "variety": "Malvasia Fina",
-    "country": "Portugal"
+    "country": "Portugal",
+    "color": "white"
   },
   {
     "variety": "Viosinho",
-    "country": "Portugal"
+    "country": "Portugal",
+    "color": "white"
   },
   {
     "variety": "Rabigato",
-    "country": "Portugal"
+    "country": "Portugal",
+    "color": "white"
   },
   {
     "variety": "Gouveio",
-    "country": "Portugal"
+    "country": "Portugal",
+    "color": "white"
   }
 ]
