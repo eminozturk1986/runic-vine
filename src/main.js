@@ -571,9 +571,9 @@ class RunicVineApp {
 
     getGrapeIcon(color) {
         const iconPaths = {
-            'red': 'icons/grape-red.svg',
-            'white': 'icons/grape-yellow.svg',
-            'pink': 'icons/grape-pink.svg'
+            'red': './public/icons/grape-red.svg',
+            'white': './public/icons/grape-yellow.svg',
+            'pink': './public/icons/grape-pink.svg'
         };
         const iconPath = iconPaths[color] || iconPaths['red'];
         return `<img src="${iconPath}" alt="${color} grape" class="grape-icon" />`;
