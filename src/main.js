@@ -127,13 +127,9 @@ class RunicVineApp {
                 </div>
 
                 <div class="question-section">
-                    <div class="grape-variety">
-                        ${this.getGrapeIcon(this.currentGrape.color)}
-                        ${this.currentGrape.variety}
-                    </div>
+                    <div class="grape-variety">${this.currentGrape.variety}</div>
                     <div class="grape-description">
-                        This is a placeholder description for the grape variety. 
-                        The actual description will be added in a future update.
+                        ${this.getGrapeIcon(this.currentGrape.color)}
                     </div>
                 </div>
                 
@@ -308,12 +304,12 @@ class RunicVineApp {
         feedback.textContent = message;
         document.body.appendChild(feedback);
         
-        // Remove feedback after 1.2 seconds
+        // Remove feedback after 1.5 seconds
         setTimeout(() => {
             if (feedback.parentNode) {
                 feedback.parentNode.removeChild(feedback);
             }
-        }, 1200);
+        }, 1500);
     }
 
     async nextQuestion() {
