@@ -179,10 +179,10 @@ class RunicVineApp {
             'Iceland': 'europe',
             'Serbia': 'europe',
             
-            // North America
-            'United States': 'north-america',
-            'Canada': 'north-america',
-            'Mexico': 'north-america',
+            // North America (using south-america map for entire Americas)
+            'United States': 'south-america',
+            'Canada': 'south-america',
+            'Mexico': 'south-america',
             
             // South America
             'Argentina': 'south-america',
