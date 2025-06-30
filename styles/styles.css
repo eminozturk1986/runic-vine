@@ -93,6 +93,18 @@ p {
 @media (max-width: 768px) {
     .country {
         stroke-width: 2;
+        /* Ensure touch events work properly */
+        pointer-events: auto;
+        -webkit-tap-highlight-color: rgba(255, 218, 0, 0.3);
+        tap-highlight-color: rgba(255, 218, 0, 0.3);
+    }
+    
+    /* Improve touch target size for countries */
+    .country:hover,
+    .country:focus,
+    .country:active {
+        stroke-width: 3;
+        filter: brightness(1.1);
     }
     
     .form-input {
@@ -253,6 +265,9 @@ p {
     background-color: var(--light-gray);
     border-radius: 8px;
     padding: 1rem;
+    /* Ensure proper touch handling */
+    touch-action: manipulation;
+    -webkit-overflow-scrolling: touch;
 }
 
 .europe-map,
@@ -262,6 +277,8 @@ p {
     height: auto;
     display: block;
     margin: 0 auto;
+    /* Improve touch handling on SVG */
+    touch-action: manipulation;
 }
 
 .country {
@@ -269,14 +286,41 @@ p {
     stroke: #ffffff;
     stroke-width: 1;
     cursor: pointer;
-    transition: fill 0.3s ease;
+    transition: fill 0.3s ease, stroke-width 0.2s ease;
+    /* Ensure countries are touchable on mobile */
+    pointer-events: auto;
+    -webkit-tap-highlight-color: transparent;
 }
 
-/* Europe map optimization for mobile */
+/* Mobile map optimizations */
 @media (max-width: 768px) {
+    .map-container {
+        padding: 0.5rem;
+        /* Improve scrollability on mobile */
+        overflow: auto;
+        max-height: 70vh;
+    }
+    
+    .continent-map {
+        /* Ensure maps are properly sized on mobile */
+        min-height: 300px;
+        max-height: 60vh;
+        width: 100%;
+    }
+    
+    /* Europe map specific optimization */
     .continent-map[viewBox*="1000 684"] {
-        transform: scale(1.2) translateY(-10%);
+        transform: scale(1.1) translateY(-5%);
         transform-origin: center center;
+    }
+    
+    /* Improve selection info visibility on mobile */
+    .selection-info {
+        position: sticky;
+        bottom: 0;
+        z-index: 10;
+        margin-top: 0.5rem;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
     }
 }
 
@@ -614,12 +658,27 @@ p {
     }
     
     .map-container {
-        padding: 0.5rem;
+        padding: 0.25rem;
+        /* Make map more accessible on very small screens */
+        max-height: 60vh;
+        overflow: scroll;
     }
     
     .continent-map {
         max-width: 100%;
         height: auto;
+        min-height: 250px;
+    }
+    
+    /* Larger touch targets on very small screens */
+    .country {
+        stroke-width: 3;
+    }
+    
+    .country:hover,
+    .country:focus,
+    .country:active {
+        stroke-width: 4;
     }
     
     .btn {
@@ -629,5 +688,14 @@ p {
     
     .game-buttons {
         flex-direction: column;
+    }
+    
+    /* Improve question section spacing on small screens */
+    .question-section {
+        padding: 1rem 0.5rem;
+    }
+    
+    .map-section {
+        padding: 1rem 0.5rem;
     }
 }

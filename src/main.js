@@ -227,6 +227,26 @@ class RunicVineApp {
             const mapPlaceholder = document.getElementById('map-placeholder');
             mapPlaceholder.innerHTML = svgText;
             
+            // Ensure the SVG is properly configured for mobile touch
+            const svg = mapPlaceholder.querySelector('svg');
+            if (svg) {
+                svg.style.touchAction = 'manipulation';
+                svg.style.userSelect = 'none';
+                svg.style.webkitUserSelect = 'none';
+                svg.style.msUserSelect = 'none';
+                
+                // Ensure proper responsive behavior
+                if (!svg.hasAttribute('viewBox') && svg.hasAttribute('width') && svg.hasAttribute('height')) {
+                    const width = svg.getAttribute('width');
+                    const height = svg.getAttribute('height');
+                    svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+                }
+                
+                // Make sure the SVG is responsive
+                svg.style.width = '100%';
+                svg.style.height = 'auto';
+            }
+            
             // Add click handlers to countries
             this.setupMapInteraction();
             
@@ -242,8 +262,13 @@ class RunicVineApp {
         const countries = document.querySelectorAll('.country');
         
         countries.forEach(country => {
-            country.addEventListener('click', (e) => {
+            // Add both click and touch event handlers for better mobile support
+            const handleSelection = (e) => {
                 if (this.gameState !== 'playing') return;
+                
+                // Prevent default behavior to avoid conflicts
+                e.preventDefault();
+                e.stopPropagation();
                 
                 this.selectedCountry = e.target.id;
                 this.totalQuestions++;
@@ -252,6 +277,35 @@ class RunicVineApp {
                 console.log('Correct answer:', this.currentGrape.country);
                 
                 this.checkAnswer(e.target);
+            };
+            
+            // Add click event for desktop
+            country.addEventListener('click', handleSelection);
+            
+            // Add touch events for mobile devices
+            country.addEventListener('touchstart', (e) => {
+                // Add visual feedback for touch
+                e.target.style.filter = 'brightness(1.2)';
+            });
+            
+            country.addEventListener('touchend', handleSelection);
+            
+            country.addEventListener('touchcancel', (e) => {
+                // Remove visual feedback if touch is cancelled
+                e.target.style.filter = '';
+            });
+            
+            // Ensure proper cursor and accessibility
+            country.style.cursor = 'pointer';
+            country.setAttribute('role', 'button');
+            country.setAttribute('tabindex', '0');
+            
+            // Add keyboard support for accessibility
+            country.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handleSelection(e);
+                }
             });
         });
     }
@@ -259,9 +313,10 @@ class RunicVineApp {
     checkAnswer(countryElement) {
         const isCorrect = this.selectedCountry === this.currentGrape.country;
         
-        // Clear any existing feedback classes
+        // Clear any existing feedback classes and styles
         document.querySelectorAll('.country').forEach(c => {
             c.classList.remove('correct', 'incorrect', 'selected');
+            c.style.filter = ''; // Clear any brightness filters from touch events
         });
         
         if (isCorrect) {
