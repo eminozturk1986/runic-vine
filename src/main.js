@@ -278,23 +278,40 @@ class RunicVineApp {
                 // Disable continent buttons
                 buttons.forEach(btn => btn.disabled = true);
                 
+                this.totalQuestions++;
+                
                 // Show feedback on selected button
                 if (selectedContinent === correctContinent) {
                     e.target.classList.add('correct-continent');
+                    this.continentCorrect = true;
+                    
+                    // Load the correct continent map for country selection
+                    await this.loadContinentMap(selectedContinent);
+                    
+                    // Show map section
+                    document.querySelector('.map-section').style.display = 'block';
+                    
                 } else {
                     e.target.classList.add('incorrect-continent');
                     // Also highlight the correct continent
                     document.querySelector(`[data-continent="${correctContinent}"]`).classList.add('correct-continent');
+                    
+                    this.continentCorrect = false;
+                    
+                    // Show feedback and move to next question
+                    this.showFeedback('❌ Wrong continent!', 'incorrect');
+                    
+                    // Update score display
+                    const questionsDisplay = document.getElementById('questions-display');
+                    if (questionsDisplay) {
+                        questionsDisplay.textContent = this.totalQuestions;
+                    }
+                    
+                    // Move to next question after brief delay
+                    setTimeout(() => {
+                        this.nextQuestion();
+                    }, 1500);
                 }
-                
-                // Load the selected continent map (even if wrong - makes game harder!)
-                await this.loadContinentMap(selectedContinent);
-                
-                // Show map section
-                document.querySelector('.map-section').style.display = 'block';
-                
-                // Store if continent choice was correct for final scoring
-                this.continentCorrect = selectedContinent === correctContinent;
             });
         });
     }
@@ -386,7 +403,6 @@ class RunicVineApp {
 
     checkAnswer(countryElement) {
         const countryCorrect = this.selectedCountry === this.currentGrape.country;
-        const bothCorrect = countryCorrect && this.continentCorrect;
         
         // Clear any existing feedback classes and styles
         document.querySelectorAll('.country').forEach(c => {
@@ -394,14 +410,13 @@ class RunicVineApp {
             c.style.filter = ''; // Clear any brightness filters from touch events
         });
         
-        if (bothCorrect) {
+        if (countryCorrect) {
+            // Perfect answer: continent was already correct to get here, now country is correct too
             this.score++;
             countryElement.classList.add('correct');
-            this.showFeedback('✅ Perfect! Continent and country correct!', 'correct');
-        } else if (countryCorrect && !this.continentCorrect) {
-            countryElement.classList.add('correct');
-            this.showFeedback('✅ Right country, but wrong continent!', 'partial');
-        } else if (!countryCorrect && this.continentCorrect) {
+            this.showFeedback('✅ Perfect! Both continent and country correct!', 'correct');
+        } else {
+            // Wrong country (but continent was correct)
             countryElement.classList.add('incorrect');
             // Highlight the correct country
             const correctCountry = document.getElementById(this.currentGrape.country);
@@ -409,9 +424,6 @@ class RunicVineApp {
                 correctCountry.classList.add('correct');
             }
             this.showFeedback('❌ Right continent, wrong country!', 'incorrect');
-        } else {
-            countryElement.classList.add('incorrect');
-            this.showFeedback('❌ Both continent and country incorrect!', 'incorrect');
         }
         
         // Update score display

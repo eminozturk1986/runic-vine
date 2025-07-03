@@ -491,11 +491,6 @@ p {
     border: 3px solid #4caf50;
 }
 
-.feedback-partial {
-    color: #ff9800;
-    border: 3px solid #ff9800;
-}
-
 .feedback-incorrect {
     color: #f44336;
     border: 3px solid #f44336;
