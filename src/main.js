@@ -17,6 +17,7 @@ class RunicVineApp {
         this.timerInterval = null;
         this.feedbackTimeout = null;
         this.continentCorrect = false;
+        this.usedGrapes = new Set(); // Track used grape varieties to avoid duplicates
         this.init();
     }
 
@@ -96,15 +97,33 @@ class RunicVineApp {
         this.score = 0;
         this.totalQuestions = 0;
         this.timeRemaining = 120;
+        this.usedGrapes.clear(); // Reset used grapes for new game
         this.selectRandomGrape();
         this.renderGameScreen();
         this.startTimer();
     }
 
     selectRandomGrape() {
-        const randomIndex = Math.floor(Math.random() * this.grapeData.length);
-        this.currentGrape = this.grapeData[randomIndex];
-        console.log('Selected grape:', this.currentGrape);
+        // Get available grapes (not yet used in this game)
+        const availableGrapes = this.grapeData.filter(grape => 
+            !this.usedGrapes.has(grape.variety)
+        );
+        
+        // If all grapes have been used (shouldn't happen in 2 minutes), reset and use all
+        if (availableGrapes.length === 0) {
+            console.log('All grapes used! Resetting for continued play...');
+            this.usedGrapes.clear();
+            availableGrapes.push(...this.grapeData);
+        }
+        
+        // Select random grape from available ones
+        const randomIndex = Math.floor(Math.random() * availableGrapes.length);
+        this.currentGrape = availableGrapes[randomIndex];
+        
+        // Mark this grape as used
+        this.usedGrapes.add(this.currentGrape.variety);
+        
+        console.log(`Selected grape: ${this.currentGrape.variety} (${this.usedGrapes.size}/${this.grapeData.length} used)`);
     }
 
     async renderGameScreen() {
@@ -280,6 +299,29 @@ class RunicVineApp {
         });
     }
 
+    resetContinentSelection() {
+        // Reset continent buttons
+        const buttons = document.querySelectorAll('.continent-btn');
+        buttons.forEach(btn => {
+            btn.disabled = false;
+            btn.classList.remove('correct-continent', 'incorrect-continent');
+        });
+        
+        // Show continent selection, hide map
+        const continentSection = document.querySelector('.continent-selection');
+        const mapSection = document.querySelector('.map-section');
+        
+        if (continentSection) continentSection.style.display = 'block';
+        if (mapSection) {
+            mapSection.style.display = 'none';
+            // Clear map placeholder
+            const mapPlaceholder = document.getElementById('map-placeholder');
+            if (mapPlaceholder) {
+                mapPlaceholder.innerHTML = 'Select a continent first...';
+            }
+        }
+    }
+
     setupMapInteraction() {
         const countries = document.querySelectorAll('.country');
         
@@ -423,12 +465,11 @@ class RunicVineApp {
             grapeVariety.textContent = this.currentGrape.variety;
         }
         
-        // Load appropriate continent map for the new grape
-        const continent = this.getGrapeContinent(this.currentGrape);
-        console.log(`Loading ${continent} map for next question: ${this.currentGrape.variety} from ${this.currentGrape.country}`);
-        await this.loadContinentMap(continent);
+        // Reset continent selection for new question
+        this.resetContinentSelection();
         
         this.selectedCountry = null;
+        this.continentCorrect = false;
     }
 
     startTimer() {
@@ -648,6 +689,7 @@ class RunicVineApp {
         this.gameState = 'playing';
         this.selectedCountry = null;
         this.currentGrape = null;
+        this.usedGrapes.clear(); // Reset used grapes for new game
         
         // Clear any existing timers
         if (this.timerInterval) {
