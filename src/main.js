@@ -16,6 +16,7 @@ class RunicVineApp {
         this.timeRemaining = 120; // 2 minutes in seconds
         this.timerInterval = null;
         this.feedbackTimeout = null;
+        this.continentCorrect = false;
         this.init();
     }
 
@@ -128,82 +129,67 @@ class RunicVineApp {
 
                 <div class="question-section">
                     <div class="grape-variety">${this.currentGrape.variety}</div>
-                    <div class="grape-description">
-                        ${this.getGrapeIcon(this.currentGrape.color)}
+                </div>
+                
+                <div class="continent-selection">
+                    <h3 class="selection-title">First, select the continent:</h3>
+                    <div class="continent-buttons">
+                        <button class="continent-btn" data-continent="europe">Europe</button>
+                        <button class="continent-btn" data-continent="asia">Asia</button>
+                        <button class="continent-btn" data-continent="africa">Africa</button>
+                        <button class="continent-btn" data-continent="south-america">Americas</button>
+                        <button class="continent-btn" data-continent="oceania">Oceania</button>
                     </div>
                 </div>
                 
-                <div class="map-section">
-                    <h3 class="map-title">Select the country of origin:</h3>
+                <div class="map-section" style="display: none;">
+                    <h3 class="map-title">Now select the country:</h3>
                     <div class="map-container">
-                        <div id="map-placeholder">Loading map...</div>
+                        <div id="map-placeholder">Select a continent first...</div>
                     </div>
                 </div>
             </div>
         `;
 
-        // Load appropriate continent map based on grape
-        const continent = this.getGrapeContinent(this.currentGrape);
-        console.log(`Loading ${continent} map for ${this.currentGrape.variety} from ${this.currentGrape.country}`);
-        await this.loadContinentMap(continent);
+        this.setupContinentSelection();
         this.updateTimerDisplay();
     }
 
     getGrapeContinent(grape) {
         const continentMap = {
             // Europe
-            'France': 'europe',
-            'Germany': 'europe', 
-            'Italy': 'europe',
-            'Spain': 'europe',
-            'Portugal': 'europe',
-            'Greece': 'europe',
             'Austria': 'europe',
-            'Switzerland': 'europe',
-            'Hungary': 'europe',
-            'Romania': 'europe',
+            'Bosnia and Herzegovina': 'europe',
             'Bulgaria': 'europe',
             'Croatia': 'europe',
-            'Slovenia': 'europe',
-            'Slovakia': 'europe',
-            'Czech Republic': 'europe',
-            'Poland': 'europe',
-            'United Kingdom': 'europe',
-            'Ireland': 'europe',
-            'Netherlands': 'europe',
-            'Belgium': 'europe',
-            'Denmark': 'europe',
-            'Sweden': 'europe',
-            'Norway': 'europe',
-            'Finland': 'europe',
-            'Iceland': 'europe',
+            'France': 'europe',
+            'Germany': 'europe', 
+            'Greece': 'europe',
+            'Hungary': 'europe',
+            'Italy': 'europe',
+            'Montenegro': 'europe',
+            'North Macedonia': 'europe',
+            'Portugal': 'europe',
+            'Romania': 'europe',
             'Serbia': 'europe',
+            'Spain': 'europe',
+            'Switzerland': 'europe',
             
-            // North America (using south-america map for entire Americas)
-            'United States': 'south-america',
-            'Canada': 'south-america',
-            'Mexico': 'south-america',
-            
-            // South America
+            // Americas (using south-america map)
             'Argentina': 'south-america',
-            'Chile': 'south-america',
-            'Brazil': 'south-america',
-            'Colombia': 'south-america',
-            'Peru': 'south-america',
-            'Venezuela': 'south-america',
-            'Ecuador': 'south-america',
-            'Bolivia': 'south-america',
-            'Uruguay': 'south-america',
-            
-            // Oceania
-            'Australia': 'oceania',
-            'New Zealand': 'oceania',
-            
-            // Africa
-            'South Africa': 'africa',
+            'USA': 'south-america',
             
             // Asia
-            'Georgia': 'asia'
+            'Armenia': 'asia',
+            'China': 'asia',
+            'Georgia': 'asia',
+            'Indonesia': 'asia',
+            'Japan': 'asia',
+            'Turkey': 'asia',
+            'Uzbekistan': 'asia',
+            
+            // Africa
+            'Egypt': 'africa'
         };
         
         return continentMap[grape.country] || 'europe'; // Default to Europe
@@ -258,6 +244,42 @@ class RunicVineApp {
         }
     }
 
+    setupContinentSelection() {
+        const buttons = document.querySelectorAll('.continent-btn');
+        
+        buttons.forEach(button => {
+            button.addEventListener('click', async (e) => {
+                if (this.gameState !== 'playing') return;
+                
+                const selectedContinent = e.target.dataset.continent;
+                const correctContinent = this.getGrapeContinent(this.currentGrape);
+                
+                console.log(`Selected continent: ${selectedContinent}, Correct: ${correctContinent}`);
+                
+                // Disable continent buttons
+                buttons.forEach(btn => btn.disabled = true);
+                
+                // Show feedback on selected button
+                if (selectedContinent === correctContinent) {
+                    e.target.classList.add('correct-continent');
+                } else {
+                    e.target.classList.add('incorrect-continent');
+                    // Also highlight the correct continent
+                    document.querySelector(`[data-continent="${correctContinent}"]`).classList.add('correct-continent');
+                }
+                
+                // Load the selected continent map (even if wrong - makes game harder!)
+                await this.loadContinentMap(selectedContinent);
+                
+                // Show map section
+                document.querySelector('.map-section').style.display = 'block';
+                
+                // Store if continent choice was correct for final scoring
+                this.continentCorrect = selectedContinent === correctContinent;
+            });
+        });
+    }
+
     setupMapInteraction() {
         const countries = document.querySelectorAll('.country');
         
@@ -270,7 +292,17 @@ class RunicVineApp {
                 e.preventDefault();
                 e.stopPropagation();
                 
-                this.selectedCountry = e.target.id;
+                // Get all valid countries from our grape database
+                const validCountries = [...new Set(this.grapeData.map(grape => grape.country))];
+                const clickedCountry = e.target.id;
+                
+                // Only accept clicks on countries that exist in our grape database
+                if (!validCountries.includes(clickedCountry)) {
+                    console.log('Invalid country clicked:', clickedCountry);
+                    return; // Ignore clicks on small/invalid countries
+                }
+                
+                this.selectedCountry = clickedCountry;
                 this.totalQuestions++;
                 
                 console.log('Country selected:', this.selectedCountry);
@@ -311,7 +343,8 @@ class RunicVineApp {
     }
 
     checkAnswer(countryElement) {
-        const isCorrect = this.selectedCountry === this.currentGrape.country;
+        const countryCorrect = this.selectedCountry === this.currentGrape.country;
+        const bothCorrect = countryCorrect && this.continentCorrect;
         
         // Clear any existing feedback classes and styles
         document.querySelectorAll('.country').forEach(c => {
@@ -319,18 +352,24 @@ class RunicVineApp {
             c.style.filter = ''; // Clear any brightness filters from touch events
         });
         
-        if (isCorrect) {
+        if (bothCorrect) {
             this.score++;
             countryElement.classList.add('correct');
-            this.showFeedback('✅ Correct!', 'correct');
-        } else {
+            this.showFeedback('✅ Perfect! Continent and country correct!', 'correct');
+        } else if (countryCorrect && !this.continentCorrect) {
+            countryElement.classList.add('correct');
+            this.showFeedback('✅ Right country, but wrong continent!', 'partial');
+        } else if (!countryCorrect && this.continentCorrect) {
             countryElement.classList.add('incorrect');
-            // Also highlight the correct country
+            // Highlight the correct country
             const correctCountry = document.getElementById(this.currentGrape.country);
             if (correctCountry) {
                 correctCountry.classList.add('correct');
             }
-            this.showFeedback('❌ Incorrect', 'incorrect');
+            this.showFeedback('❌ Right continent, wrong country!', 'incorrect');
+        } else {
+            countryElement.classList.add('incorrect');
+            this.showFeedback('❌ Both continent and country incorrect!', 'incorrect');
         }
         
         // Update score display
@@ -624,15 +663,6 @@ class RunicVineApp {
         this.startTimer();
     }
 
-    getGrapeIcon(color) {
-        const iconPaths = {
-            'red': './public/icons/grape-red.svg',
-            'white': './public/icons/grape-yellow.svg',
-            'pink': './public/icons/grape-pink.svg'
-        };
-        const iconPath = iconPaths[color] || iconPaths['red'];
-        return `<img src="${iconPath}" alt="${color} grape" class="grape-icon" />`;
-    }
 
     renderError() {
         this.gameContainer.innerHTML = `
