@@ -130,20 +130,9 @@ class RunicVineApp {
         this.gameContainer.innerHTML = `
             <div class="game-screen">
                 <div class="game-header">
-                    <div class="score-container">
-                        <div class="score-label">Score</div>
-                        <div class="score-display" id="score-display">${this.score}</div>
-                    </div>
-                    
-                    <div class="timer-container">
-                        <div class="timer-label">Time Remaining</div>
-                        <div class="timer-display" id="timer-display">2:00</div>
-                    </div>
-                    
-                    <div class="score-container">
-                        <div class="score-label">Questions</div>
-                        <div class="score-display" id="questions-display">${this.totalQuestions}</div>
-                    </div>
+                    <span class="stat">Score: <strong id="score-display">${this.score}</strong></span>
+                    <span class="stat">Time: <strong id="timer-display">2:00</strong></span>
+                    <span class="stat">Questions: <strong id="questions-display">${this.totalQuestions}</strong></span>
                 </div>
 
                 <div class="question-section">
@@ -275,8 +264,13 @@ class RunicVineApp {
                 
                 console.log(`Selected continent: ${selectedContinent}, Correct: ${correctContinent}`);
                 
-                // Disable continent buttons
-                buttons.forEach(btn => btn.disabled = true);
+                // Hide other continent buttons to save space
+                buttons.forEach(btn => {
+                    if (btn !== e.target) {
+                        btn.style.display = 'none';
+                    }
+                    btn.disabled = true;
+                });
                 
                 this.totalQuestions++;
                 
@@ -288,7 +282,7 @@ class RunicVineApp {
                     // Load the correct continent map for country selection
                     await this.loadContinentMap(selectedContinent);
                     
-                    // Show map section
+                    // Show map section right below the selected continent button
                     document.querySelector('.map-section').style.display = 'block';
                     
                 } else {
@@ -322,6 +316,7 @@ class RunicVineApp {
         buttons.forEach(btn => {
             btn.disabled = false;
             btn.classList.remove('correct-continent', 'incorrect-continent');
+            btn.style.display = 'block'; // Restore hidden buttons
         });
         
         // Show continent selection, hide map

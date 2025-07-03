@@ -34,14 +34,14 @@ body {
 
 header {
     background-color: var(--white);
-    padding: 2rem 1rem;
+    padding: 0.8rem 1rem;
     text-align: center;
     border-bottom: 1px solid var(--border-gray);
 }
 
 header h1 {
     font-family: var(--font-display);
-    font-size: 3rem;
+    font-size: 1.8rem;
     font-weight: 700;
     color: var(--primary-red);
     margin: 0;
@@ -406,6 +406,17 @@ p {
     background-color: var(--white);
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.stat {
+    font-size: 1rem;
+    color: var(--primary-blue-gray);
+    margin: 0 1rem;
+}
+
+.stat strong {
+    color: var(--primary-red);
+    font-weight: 700;
 }
 
 .timer-container {
