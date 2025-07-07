@@ -1,0 +1,69 @@
+RUNIC VINE - WINE GEOGRAPHY GAME
+=====================================
+
+GAME OVERVIEW:
+- 2-minute quiz matching grape varieties to their countries of origin
+- Two-step difficulty: continent selection first, then country selection
+- 202 grape varieties from CSV database
+- Mobile-optimized interface
+
+CURRENT STATUS:
+✅ COMPLETED FEATURES:
+- Europe SVG map cropped to wine regions (viewBox: 172.21 319.83 689.11 439.77)
+- UK and Serbia made selectable on map
+- Small countries (Vatican, Liechtenstein, Luxembourg, Andorra, San Marino) removed
+- Database updated with 202 grape varieties from CSV
+- Grape color icons removed from UI
+- Two-step continent → country selection implemented
+- Bug fixes: continent buttons reset properly, no repeated questions, game flow improvements
+- Mobile optimization: compact header, one-line stats, space-saving continent selection
+
+🎯 KEY TECHNICAL IMPLEMENTATIONS:
+- Set data structure for tracking used questions (no repeats)
+- Continent mapping for all countries in database
+- Mobile-responsive design with touch optimization
+- Proper game state management and reset functionality
+
+📂 IMPORTANT FILES:
+- src/main.js: Main game logic and state management
+- styles/styles.css: All styling including mobile optimizations
+- data/grape_data.json: 202 grape varieties database (converted from CSV)
+- public/maps/europe-detailed.svg: Cropped Europe map
+- index.html: Basic HTML structure
+
+🐛 KNOWN BUGS FIXED:
+- Continent buttons stuck after first question → Fixed with resetContinentSelection()
+- Same questions repeating → Fixed with usedGrapes Set
+- Game stuck when continent wrong → Fixed with immediate next question
+- Mobile layout issues → Fixed with responsive design
+
+⚙️ GAME FLOW:
+1. Player enters name/email
+2. Game shows grape variety
+3. Player selects continent (other buttons hide to save space)
+4. If continent correct: map loads for country selection
+5. If continent wrong: immediate next question with feedback
+6. Country selection completes the question
+7. Process repeats for 2 minutes
+8. End screen shows score and leaderboard
+
+🎮 CONTROLS:
+- Touch-optimized for mobile
+- Keyboard accessibility support
+- Proper hover/focus states
+- Responsive button sizing
+
+💾 DATA STRUCTURE:
+- JSON format: {"variety": "grape_name", "country": "origin_country"}
+- Continent mapping covers Europe, Asia, Africa, Americas, Oceania
+- LocalStorage for leaderboard persistence
+
+🔧 NEXT DEVELOPMENT IDEAS:
+- Add more continents/maps
+- Implement difficulty levels
+- Add sound effects
+- Export scores feature
+- Multiplayer mode
+- Wine region specificity (sub-regions)
+
+REMEMBER: Game is fully functional and mobile-optimized. All major bugs resolved.

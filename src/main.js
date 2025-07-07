@@ -146,7 +146,6 @@ class RunicVineApp {
                         <button class="continent-btn" data-continent="asia">Asia</button>
                         <button class="continent-btn" data-continent="africa">Africa</button>
                         <button class="continent-btn" data-continent="south-america">Americas</button>
-                        <button class="continent-btn" data-continent="oceania">Oceania</button>
                     </div>
                 </div>
                 
@@ -288,7 +287,10 @@ class RunicVineApp {
                 } else {
                     e.target.classList.add('incorrect-continent');
                     // Also highlight the correct continent
-                    document.querySelector(`[data-continent="${correctContinent}"]`).classList.add('correct-continent');
+                    const correctBtn = document.querySelector(`[data-continent="${correctContinent}"]`);
+                    if (correctBtn) {
+                        correctBtn.classList.add('correct-continent');
+                    }
                     
                     this.continentCorrect = false;
                     
@@ -317,6 +319,10 @@ class RunicVineApp {
             btn.disabled = false;
             btn.classList.remove('correct-continent', 'incorrect-continent');
             btn.style.display = 'block'; // Restore hidden buttons
+            // Clear any inline styles that might persist
+            btn.style.backgroundColor = '';
+            btn.style.color = '';
+            btn.style.borderColor = '';
         });
         
         // Show continent selection, hide map
