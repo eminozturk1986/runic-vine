@@ -64,7 +64,10 @@ class RunicVineApp {
                         <input type="email" id="player-email" class="form-input" placeholder="Enter your email" required>
                     </div>
                     
-                    <button type="submit" class="btn">Start Game</button>
+                    <div class="button-group">
+                        <button type="submit" class="btn">Start Game</button>
+                        <button type="button" class="btn btn-secondary" onclick="app.showLeaderboard()">View Rankings</button>
+                    </div>
                 </form>
                 
                 <p style="margin-top: 2rem; color: var(--primary-blue-gray); opacity: 0.7; font-size: 0.9rem;">
@@ -718,6 +721,33 @@ class RunicVineApp {
         this.startTimer();
     }
 
+
+    goToMainPage() {
+        // Clear any existing timers
+        if (this.timerInterval) {
+            clearInterval(this.timerInterval);
+        }
+        if (this.feedbackTimeout) {
+            clearTimeout(this.feedbackTimeout);
+        }
+        
+        this.gameState = 'start';
+        this.renderStartScreen();
+    }
+    
+    showLeaderboard() {
+        this.gameContainer.innerHTML = `
+            <div class="leaderboard-screen">
+                <h2>🏆 Top Rankings</h2>
+                <div class="leaderboard-container">
+                    ${this.renderLeaderboard()}
+                </div>
+                <div class="button-group">
+                    <button class="btn" onclick="app.renderStartScreen()">Back to Main</button>
+                </div>
+            </div>
+        `;
+    }
 
     renderError() {
         this.gameContainer.innerHTML = `
