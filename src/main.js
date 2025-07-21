@@ -298,7 +298,7 @@ class RunicVineApp {
                     this.continentCorrect = false;
                     
                     // Show feedback and move to next question
-                    this.showFeedback('❌ Wrong continent!', 'incorrect');
+                    this.showFeedback('❌', 'incorrect');
                     
                     // Update score display
                     const questionsDisplay = document.getElementById('questions-display');
@@ -418,7 +418,7 @@ class RunicVineApp {
             // Perfect answer: continent was already correct to get here, now country is correct too
             this.score++;
             countryElement.classList.add('correct');
-            this.showFeedback('✅ Perfect! Both continent and country correct!', 'correct');
+            this.showFeedback('✅', 'correct');
         } else {
             // Wrong country (but continent was correct)
             countryElement.classList.add('incorrect');
@@ -427,7 +427,7 @@ class RunicVineApp {
             if (correctCountry) {
                 correctCountry.classList.add('correct');
             }
-            this.showFeedback('❌ Right continent, wrong country!', 'incorrect');
+            this.showFeedback(`❌ ${this.currentGrape.country}`, 'incorrect');
         }
         
         // Update score display
