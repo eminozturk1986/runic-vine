@@ -138,24 +138,24 @@ class RunicVineApp {
                     <span class="stat">Questions: <strong id="questions-display">${this.totalQuestions}</strong></span>
                 </div>
 
+                <div class="map-section" style="display: none;">
+                    <h3 class="map-title">Select the country:</h3>
+                    <div class="map-container">
+                        <div id="map-placeholder">Select a continent first...</div>
+                    </div>
+                </div>
+
                 <div class="question-section">
                     <div class="grape-variety">${this.currentGrape.variety}</div>
                 </div>
                 
                 <div class="continent-selection">
-                    <h3 class="selection-title">First, select the continent:</h3>
+                    <h3 class="selection-title">Select continent:</h3>
                     <div class="continent-buttons">
                         <button class="continent-btn" data-continent="europe">Europe</button>
                         <button class="continent-btn" data-continent="asia">Asia</button>
                         <button class="continent-btn" data-continent="africa">Africa</button>
                         <button class="continent-btn" data-continent="south-america">Americas</button>
-                    </div>
-                </div>
-                
-                <div class="map-section" style="display: none;">
-                    <h3 class="map-title">Now select the country:</h3>
-                    <div class="map-container">
-                        <div id="map-placeholder">Select a continent first...</div>
                     </div>
                 </div>
             </div>
