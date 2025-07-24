@@ -956,6 +956,9 @@ class RunicVineApp {
         // Save score to leaderboard
         this.saveScore();
         
+        // Scroll to top to ensure the results are visible
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        
         this.gameContainer.innerHTML = `
             <div class="max-w-4xl w-full mx-auto space-y-6">
                 <!-- Final Score Card -->
