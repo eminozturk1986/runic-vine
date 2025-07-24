@@ -293,23 +293,50 @@ class RunicVineApp {
             'Egypt': 'africa'
         };
         
-        const result = continentMap[grape.country] || 'europe';
+        // Try multiple approaches to match the country
+        let result = continentMap[grape.country];
+        
+        if (!result) {
+            // Try with trimmed country name
+            result = continentMap[grape.country.trim()];
+        }
+        
+        if (!result) {
+            // Try case-insensitive match
+            const countryLower = grape.country.trim().toLowerCase();
+            const matchingKey = Object.keys(continentMap).find(key => 
+                key.toLowerCase() === countryLower
+            );
+            if (matchingKey) {
+                result = continentMap[matchingKey];
+            }
+        }
+        
+        // Default to Europe if no match found  
+        result = result || 'europe';
         
         // Extra debugging for ALL grapes to catch Turkish ones
         console.log('🔍 GRAPE ANALYSIS:', grape.variety, '→', grape.country);
         
-        // Extra debugging for Turkish grapes
-        if (grape.country === 'Turkey') {
-            console.log('🇹🇷 TURKISH GRAPE DEBUG:');
+        // Check if this might be a Turkish grape with encoding issues
+        const isTurkishGrape = grape.country.includes('Turkey') || grape.country.includes('turkey') || 
+                              grape.country.trim().toLowerCase() === 'turkey' ||
+                              grape.variety.includes('ğ') || grape.variety.includes('ı') || 
+                              grape.variety.includes('ö') || grape.variety.includes('ü') ||
+                              grape.variety.includes('ç') || grape.variety.includes('ş');
+        
+        if (isTurkishGrape) {
+            console.log('🇹🇷 POTENTIAL TURKISH GRAPE FOUND:');
             console.log('- Variety:', JSON.stringify(grape.variety));
             console.log('- Country:', JSON.stringify(grape.country));
-            console.log('- Variety length:', grape.variety.length);
+            console.log('- Country trimmed:', JSON.stringify(grape.country.trim()));
             console.log('- Country length:', grape.country.length);
-            console.log('- Variety char codes:', [...grape.variety].map(c => c.charCodeAt(0)));
             console.log('- Country char codes:', [...grape.country].map(c => c.charCodeAt(0)));
-            console.log('- Mapped continent:', result);
-            console.log('- Turkey in map?', continentMap.hasOwnProperty('Turkey'));
-            console.log('- Exact match test:', grape.country === 'Turkey');
+            console.log('- Exact Turkey match:', grape.country === 'Turkey');
+            console.log('- Trimmed Turkey match:', grape.country.trim() === 'Turkey');
+            console.log('- Mapped continent (raw):', continentMap[grape.country]);
+            console.log('- Mapped continent (trimmed):', continentMap[grape.country.trim()]);
+            console.log('- Final result:', result);
         }
         
         return result;
