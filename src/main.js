@@ -298,10 +298,15 @@ class RunicVineApp {
         // Extra debugging for Turkish grapes
         if (grape.country === 'Turkey') {
             console.log('🇹🇷 TURKISH GRAPE DEBUG:');
-            console.log('- Variety:', grape.variety);
-            console.log('- Country:', grape.country);
+            console.log('- Variety:', JSON.stringify(grape.variety));
+            console.log('- Country:', JSON.stringify(grape.country));
+            console.log('- Variety length:', grape.variety.length);
+            console.log('- Country length:', grape.country.length);
+            console.log('- Variety char codes:', [...grape.variety].map(c => c.charCodeAt(0)));
+            console.log('- Country char codes:', [...grape.country].map(c => c.charCodeAt(0)));
             console.log('- Mapped continent:', result);
             console.log('- Turkey in map?', continentMap.hasOwnProperty('Turkey'));
+            console.log('- Exact match test:', grape.country === 'Turkey');
         }
         
         return result;
