@@ -148,6 +148,94 @@ class RunicVineApp {
     }
 
     renderStartScreen() {
+        // Check if user is already registered
+        const savedUser = this.getSavedUser();
+        
+        if (savedUser) {
+            this.renderWelcomeBackScreen(savedUser);
+        } else {
+            this.renderRegistrationScreen();
+        }
+    }
+    
+    getSavedUser() {
+        try {
+            const userData = localStorage.getItem('runicVineUser');
+            return userData ? JSON.parse(userData) : null;
+        } catch (error) {
+            console.warn('Error reading saved user data:', error);
+            return null;
+        }
+    }
+    
+    saveUser(name, email) {
+        try {
+            const existingUser = this.getSavedUser();
+            const userData = {
+                name: name,
+                email: email,
+                registeredAt: existingUser?.registeredAt || Date.now(),
+                totalGamesPlayed: (existingUser?.totalGamesPlayed || 0) + 1
+            };
+            localStorage.setItem('runicVineUser', JSON.stringify(userData));
+            return userData;
+        } catch (error) {
+            console.warn('Error saving user data:', error);
+            return null;
+        }
+    }
+    
+    clearSavedUser() {
+        try {
+            localStorage.removeItem('runicVineUser');
+        } catch (error) {
+            console.warn('Error clearing user data:', error);
+        }
+    }
+    
+    renderWelcomeBackScreen(savedUser) {
+        this.gameContainer.innerHTML = `
+            <div class="max-w-md w-full mx-auto">
+                <div class="bg-white rounded-2xl shadow-xl border border-rose-100 p-8">
+                    <div class="text-center mb-8">
+                        <div class="mb-4">
+                            <i class="fas fa-user-check text-4xl text-green-500 mb-2"></i>
+                        </div>
+                        <h2 class="text-3xl font-bold text-gray-900 mb-2">Welcome Back!</h2>
+                        <p class="text-lg font-medium text-rose-600 mb-2">${savedUser.name}</p>
+                        <p class="text-sm text-gray-500">${savedUser.email}</p>
+                        <p class="text-xs text-gray-400 mt-2">Games played: ${savedUser.totalGamesPlayed || 1}</p>
+                    </div>
+                    
+                    <div class="space-y-3">
+                        <button type="button" onclick="app.startGameWithSavedUser()" 
+                            class="w-full bg-rose-600 hover:bg-rose-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 hover:shadow-lg">
+                            <i class="fas fa-play mr-2"></i>Start New Game
+                        </button>
+                        
+                        <button type="button" onclick="app.showLeaderboard()" 
+                            class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105">
+                            <i class="fas fa-trophy mr-2"></i>View Rankings
+                        </button>
+                        
+                        <button type="button" onclick="app.changeProfile()" 
+                            class="w-full bg-blue-50 hover:bg-blue-100 text-blue-700 font-medium py-2 px-4 rounded-lg transition-all duration-200 text-sm">
+                            <i class="fas fa-edit mr-2"></i>Change Profile
+                        </button>
+                    </div>
+                    
+                    <div class="text-center mt-6 pt-6 border-t border-gray-100">
+                        <p class="text-sm text-gray-500">
+                            <i class="fas fa-wine-glass-alt text-rose-500 mr-2"></i>
+                            ${this.grapeData.length} grape varieties loaded and ready
+                        </p>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+    
+    renderRegistrationScreen() {
         this.gameContainer.innerHTML = `
             <div class="max-w-md w-full mx-auto">
                 <div class="bg-white rounded-2xl shadow-xl border border-rose-100 p-8">
@@ -189,11 +277,14 @@ class RunicVineApp {
                             <i class="fas fa-wine-glass-alt text-rose-500 mr-2"></i>
                             ${this.grapeData.length} grape varieties loaded and ready
                         </p>
+                        <p class="text-xs text-gray-400 mt-2">
+                            <i class="fas fa-shield-alt mr-1"></i>Your data stays on your device
+                        </p>
                     </div>
                 </div>
             </div>
         `;
-
+        
         // Add form submit handler
         document.getElementById('player-form').addEventListener('submit', (e) => {
             e.preventDefault();
@@ -206,11 +297,37 @@ class RunicVineApp {
         const email = document.getElementById('player-email').value.trim();
         
         if (name && email) {
+            // Save user data to localStorage
+            const savedUser = this.saveUser(name, email);
+            
+            // Set current player data
             this.playerData.name = name;
             this.playerData.email = email;
-            console.log('Player data:', this.playerData);
+            
+            console.log('New user registered and saved:', savedUser);
             this.startGame();
         }
+    }
+    
+    startGameWithSavedUser() {
+        const savedUser = this.getSavedUser();
+        if (savedUser) {
+            // Update game count
+            this.saveUser(savedUser.name, savedUser.email);
+            
+            // Set current player data
+            this.playerData.name = savedUser.name;
+            this.playerData.email = savedUser.email;
+            
+            console.log('Returning user starting game:', savedUser);
+            this.startGame();
+        }
+    }
+    
+    changeProfile() {
+        // Clear saved user and show registration screen
+        this.clearSavedUser();
+        this.renderRegistrationScreen();
     }
 
     startGame() {
