@@ -175,7 +175,7 @@ class RunicVineApp {
                         <div class="inline-flex items-center justify-center w-16 h-16 bg-rose-100 rounded-full mb-4">
                             <i class="fas fa-wine-glass-alt text-2xl text-rose-600"></i>
                         </div>
-                        <h2 class="text-4xl font-bold text-gray-900 mb-2">${this.currentGrape.variety}</h2>
+                        <h2 class="grape-variety text-4xl font-bold text-gray-900 mb-2">${this.currentGrape.variety}</h2>
                         <p class="text-gray-600">Which continent does this grape variety originate from?</p>
                     </div>
                     
