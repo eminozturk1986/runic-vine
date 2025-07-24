@@ -1,5 +1,11 @@
 // Runic Vine - Main Application Entry Point
 
+// Initialize Supabase
+const SUPABASE_URL = 'https://icrawmqlatcvdsljmest.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImljcmF3bXFsYXRjdmRzbGptZXN0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMzNjE0OTcsImV4cCI6MjA2ODkzNzQ5N30.MCKIqfq393A6cBdr11EIYu_PYZ3uF2LAHLk7qLF-gms';
+
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
 class RunicVineApp {
     constructor() {
         this.gameContainer = document.getElementById('game-container');
@@ -996,27 +1002,72 @@ class RunicVineApp {
                         <p class="text-gray-600">See how you rank against other players</p>
                     </div>
                     <div id="leaderboard-container">
-                        ${this.renderLeaderboard()}
+                        <div class="text-center text-gray-500 py-4">Loading leaderboard...</div>
                     </div>
                 </div>
             </div>
         `;
         
+        // Load leaderboard asynchronously after rendering
+        this.loadLeaderboardAsync();
+        
         console.log('Game ended. Final score:', this.score, '/', this.totalQuestions, `(${percentage}%)`);
     }
+    
+    async loadLeaderboardAsync() {
+        try {
+            const leaderboardHTML = await this.renderLeaderboard();
+            const container = document.getElementById('leaderboard-container');
+            if (container) {
+                container.innerHTML = leaderboardHTML;
+            }
+        } catch (error) {
+            console.error('Error loading leaderboard:', error);
+            const container = document.getElementById('leaderboard-container');
+            if (container) {
+                container.innerHTML = '<div class="text-center text-gray-500 py-4">Unable to load leaderboard</div>';
+            }
+        }
+    }
 
-    saveScore() {
+    async saveScore() {
         const scoreData = {
             name: this.playerData.name,
             email: this.playerData.email,
             score: this.score,
-            totalQuestions: this.totalQuestions,
-            accuracy: this.totalQuestions > 0 ? Math.round((this.score / this.totalQuestions) * 100) : 0,
-            date: new Date().toLocaleDateString('en-GB'), // DD/MM/YYYY format
+            total_questions: this.totalQuestions,
+            accuracy: this.totalQuestions > 0 ? Math.round((this.score / this.totalQuestions) * 100) : 0
+        };
+        
+        try {
+            const { data, error } = await supabase
+                .from('leaderboard')
+                .insert([scoreData])
+                .select();
+            
+            if (error) {
+                console.error('Error saving score to Supabase:', error);
+                // Fallback to localStorage
+                this.saveScoreToLocalStorage(scoreData);
+            } else {
+                console.log('Score saved successfully to Supabase:', data);
+            }
+        } catch (error) {
+            console.error('Network error saving score:', error);
+            // Fallback to localStorage
+            this.saveScoreToLocalStorage(scoreData);
+        }
+    }
+    
+    saveScoreToLocalStorage(scoreData) {
+        // Fallback localStorage implementation
+        const localScoreData = {
+            ...scoreData,
+            totalQuestions: scoreData.total_questions, // Convert back for compatibility
+            date: new Date().toLocaleDateString('en-GB'),
             timestamp: Date.now()
         };
         
-        // Get existing scores from localStorage
         let scores = [];
         try {
             const existingScores = localStorage.getItem('runicVineScores');
@@ -1028,29 +1079,110 @@ class RunicVineApp {
             scores = [];
         }
         
-        // Add new score
-        scores.push(scoreData);
-        
-        // Sort by score (descending), then by accuracy (descending), then by timestamp (ascending for tie-breaking)
+        scores.push(localScoreData);
         scores.sort((a, b) => {
             if (b.score !== a.score) return b.score - a.score;
             if (b.accuracy !== a.accuracy) return b.accuracy - a.accuracy;
             return a.timestamp - b.timestamp;
         });
         
-        // Keep only top 50 scores to prevent localStorage from growing too large
         scores = scores.slice(0, 50);
         
-        // Save back to localStorage
         try {
             localStorage.setItem('runicVineScores', JSON.stringify(scores));
-            console.log('Score saved successfully:', scoreData);
+            console.log('Score saved to localStorage as fallback:', localScoreData);
         } catch (error) {
-            console.error('Error saving score:', error);
+            console.error('Error saving score to localStorage:', error);
         }
     }
 
-    renderLeaderboard() {
+    async renderLeaderboard() {
+        let scores = [];
+        try {
+            // Try to fetch from Supabase first
+            const { data, error } = await supabase
+                .from('leaderboard')
+                .select('*')
+                .order('score', { ascending: false })
+                .order('accuracy', { ascending: false })
+                .order('created_at', { ascending: true })
+                .limit(10);
+
+            if (error) {
+                console.error('Error fetching leaderboard from Supabase:', error);
+                // Fallback to localStorage
+                return this.renderLocalLeaderboard();
+            }
+
+            if (data) {
+                scores = data.map(item => ({
+                    name: item.name,
+                    score: item.score,
+                    totalQuestions: item.total_questions,
+                    accuracy: item.accuracy,
+                    date: new Date(item.created_at).toLocaleDateString('en-GB'),
+                    timestamp: new Date(item.created_at).getTime()
+                }));
+            }
+        } catch (error) {
+            console.error('Network error loading leaderboard:', error);
+            // Fallback to localStorage
+            return this.renderLocalLeaderboard();
+        }
+        
+        if (scores.length === 0) {
+            return '<div class="text-center text-gray-500 py-8">No scores yet. Be the first to play!</div>';
+        }
+        
+        const currentPlayerTimestamp = Date.now();
+        
+        let leaderboardHTML = '<div class="space-y-3">';
+        
+        scores.forEach((scoreData, index) => {
+            const rank = index + 1;
+            const isCurrentPlayer = Math.abs(scoreData.timestamp - currentPlayerTimestamp) < 10000; // Within 10 seconds
+            const highlightClass = isCurrentPlayer ? 'ring-2 ring-rose-500 bg-rose-50' : 'bg-gray-50';
+            
+            let rankDisplay = rank;
+            let rankIcon = '';
+            if (rank === 1) {
+                rankDisplay = '1st';
+                rankIcon = '<i class="fas fa-trophy text-yellow-500 text-lg"></i>';
+            } else if (rank === 2) {
+                rankDisplay = '2nd';
+                rankIcon = '<i class="fas fa-medal text-gray-400 text-lg"></i>';
+            } else if (rank === 3) {
+                rankDisplay = '3rd';
+                rankIcon = '<i class="fas fa-award text-amber-600 text-lg"></i>';
+            } else {
+                rankIcon = `<span class="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center text-sm font-semibold text-gray-600">${rank}</span>`;
+            }
+            
+            leaderboardHTML += `
+                <div class="flex items-center justify-between p-4 rounded-xl border border-gray-200 ${highlightClass} transition-all duration-200">
+                    <div class="flex items-center space-x-4">
+                        <div class="flex items-center justify-center w-8">
+                            ${rankIcon}
+                        </div>
+                        <div>
+                            <div class="font-semibold text-gray-900">${this.escapeHtml(scoreData.name)}</div>
+                            <div class="text-sm text-gray-500">${scoreData.date}</div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="font-bold text-gray-900">${scoreData.score}/${scoreData.totalQuestions}</div>
+                        <div class="text-sm font-medium text-gray-600">${scoreData.accuracy}% accuracy</div>
+                    </div>
+                </div>
+            `;
+        });
+        
+        leaderboardHTML += '</div>';
+        
+        return leaderboardHTML;
+    }
+    
+    renderLocalLeaderboard() {
         let scores = [];
         try {
             const existingScores = localStorage.getItem('runicVineScores');
@@ -1168,12 +1300,12 @@ class RunicVineApp {
                         <div class="inline-flex items-center justify-center w-16 h-16 bg-yellow-100 rounded-full mb-4">
                             <i class="fas fa-trophy text-2xl text-yellow-600"></i>
                         </div>
-                        <h2 class="text-3xl font-bold text-gray-900 mb-2">Top Rankings</h2>
-                        <p class="text-gray-600">See how you rank against other players</p>
+                        <h2 class="text-3xl font-bold text-gray-900 mb-2">Global Rankings</h2>
+                        <p class="text-gray-600">See how you rank against players worldwide</p>
                     </div>
                     
-                    <div class="mb-8">
-                        ${this.renderLeaderboard()}
+                    <div class="mb-8" id="standalone-leaderboard">
+                        <div class="text-center text-gray-500 py-4">Loading global leaderboard...</div>
                     </div>
                     
                     <div class="text-center">
@@ -1184,6 +1316,25 @@ class RunicVineApp {
                 </div>
             </div>
         `;
+        
+        // Load leaderboard asynchronously
+        this.loadStandaloneLeaderboard();
+    }
+    
+    async loadStandaloneLeaderboard() {
+        try {
+            const leaderboardHTML = await this.renderLeaderboard();
+            const container = document.getElementById('standalone-leaderboard');
+            if (container) {
+                container.innerHTML = leaderboardHTML;
+            }
+        } catch (error) {
+            console.error('Error loading standalone leaderboard:', error);
+            const container = document.getElementById('standalone-leaderboard');
+            if (container) {
+                container.innerHTML = '<div class="text-center text-gray-500 py-4">Unable to load leaderboard</div>';
+            }
+        }
     }
 
     renderError() {
