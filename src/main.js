@@ -417,29 +417,10 @@ class RunicVineApp {
         // Default to Europe if no match found  
         result = result || 'europe';
         
-        // Extra debugging for ALL grapes to catch Turkish ones
-        console.log('🔍 GRAPE ANALYSIS:', grape.variety, '→', grape.country);
+        // Minimal debugging - only show grape and final result
+        console.log('🔍', grape.variety, '(' + grape.country + ') →', result);
         
-        // Check if this might be a Turkish grape with encoding issues
-        const isTurkishGrape = grape.country.includes('Turkey') || grape.country.includes('turkey') || 
-                              grape.country.trim().toLowerCase() === 'turkey' ||
-                              grape.variety.includes('ğ') || grape.variety.includes('ı') || 
-                              grape.variety.includes('ö') || grape.variety.includes('ü') ||
-                              grape.variety.includes('ç') || grape.variety.includes('ş');
-        
-        if (isTurkishGrape) {
-            console.log('🇹🇷 POTENTIAL TURKISH GRAPE FOUND:');
-            console.log('- Variety:', JSON.stringify(grape.variety));
-            console.log('- Country:', JSON.stringify(grape.country));
-            console.log('- Country trimmed:', JSON.stringify(grape.country.trim()));
-            console.log('- Country length:', grape.country.length);
-            console.log('- Country char codes:', [...grape.country].map(c => c.charCodeAt(0)));
-            console.log('- Exact Turkey match:', grape.country === 'Turkey');
-            console.log('- Trimmed Turkey match:', grape.country.trim() === 'Turkey');
-            console.log('- Mapped continent (raw):', continentMap[grape.country]);
-            console.log('- Mapped continent (trimmed):', continentMap[grape.country.trim()]);
-            console.log('- Final result:', result);
-        }
+        // Removed excessive debugging - system is working correctly
         
         return result;
     }
