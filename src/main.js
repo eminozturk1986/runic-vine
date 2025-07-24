@@ -26,11 +26,109 @@ class RunicVineApp {
         
         try {
             await this.loadGrapeData();
+            this.validateGrapeDataMapping(); // Add comprehensive validation
             this.renderStartScreen();
         } catch (error) {
             console.error('Failed to initialize app:', error);
             this.renderError();
         }
+    }
+
+    validateGrapeDataMapping() {
+        console.log('🔍 COMPREHENSIVE GRAPE DATA VALIDATION');
+        
+        // Get all unique countries from grape data
+        const allCountries = [...new Set(this.grapeData.map(grape => grape.country))];
+        console.log('📊 All countries in grape data:', allCountries);
+        
+        // Check continent mapping coverage
+        const continentMap = {
+            // Europe
+            'Austria': 'europe',
+            'Bosnia and Herzegovina': 'europe',
+            'Bulgaria': 'europe',
+            'Croatia': 'europe',
+            'France': 'europe',
+            'Germany': 'europe', 
+            'Greece': 'europe',
+            'Hungary': 'europe',
+            'Italy': 'europe',
+            'Montenegro': 'europe',
+            'North Macedonia': 'europe',
+            'Portugal': 'europe',
+            'Romania': 'europe',
+            'Serbia': 'europe',
+            'Spain': 'europe',
+            'Switzerland': 'europe',
+            
+            // Americas (using south-america map)
+            'Argentina': 'south-america',
+            'USA': 'south-america',
+            
+            // Asia
+            'Armenia': 'asia',
+            'China': 'asia',
+            'Georgia': 'asia',
+            'Indonesia': 'asia',
+            'Japan': 'asia',
+            'Turkey': 'asia',
+            'Uzbekistan': 'asia',
+            
+            // Africa
+            'Egypt': 'africa'
+        };
+        
+        console.log('🗺️  Countries in continent mapping:', Object.keys(continentMap));
+        
+        // Find missing countries
+        const unmappedCountries = [];
+        const problematicCountries = [];
+        
+        allCountries.forEach(country => {
+            const trimmedCountry = country.trim();
+            const hasDirectMapping = continentMap.hasOwnProperty(country);
+            const hasTrimmedMapping = continentMap.hasOwnProperty(trimmedCountry);
+            
+            if (!hasDirectMapping && !hasTrimmedMapping) {
+                unmappedCountries.push({
+                    original: country,
+                    trimmed: trimmedCountry,
+                    length: country.length,
+                    charCodes: [...country].map(c => c.charCodeAt(0))
+                });
+            } else if (!hasDirectMapping && hasTrimmedMapping) {
+                problematicCountries.push({
+                    original: country,
+                    trimmed: trimmedCountry,
+                    issue: 'whitespace'
+                });
+            }
+        });
+        
+        if (unmappedCountries.length > 0) {
+            console.error('❌ UNMAPPED COUNTRIES:', unmappedCountries);
+        }
+        
+        if (problematicCountries.length > 0) {
+            console.warn('⚠️  COUNTRIES WITH WHITESPACE ISSUES:', problematicCountries);
+        }
+        
+        if (unmappedCountries.length === 0 && problematicCountries.length === 0) {
+            console.log('✅ All countries properly mapped!');
+        }
+        
+        // Test specific problematic grapes
+        const testGrapes = this.grapeData.filter(grape => 
+            grape.variety === 'Dornfelder' || 
+            grape.country === 'Turkey' ||
+            grape.variety.includes('ğ') || grape.variety.includes('ö')
+        );
+        
+        console.log('🧪 Testing problematic grapes:');
+        testGrapes.forEach(grape => {
+            const continent = this.getGrapeContinent(grape);
+            console.log(`- ${grape.variety} (${grape.country}) → ${continent}`);
+        });
     }
 
     async loadGrapeData() {
@@ -126,7 +224,7 @@ class RunicVineApp {
 
     selectRandomGrape() {
         // DEBUG MODE: Force Turkish grapes for testing
-        const debugMode = true; // Set to false after testing
+        const debugMode = false; // Set to false after testing
         const turkishGrapes = ['Boğazkere', 'Emir', 'Kalecik Karası', 'Keten Gömlek', 'Narince', 'Papazkarası', 'Çalkarası', 'Öküzgözü'];
         
         if (debugMode) {
