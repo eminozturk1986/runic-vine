@@ -169,13 +169,10 @@ class RunicVineApp {
                 </div>
 
                 <!-- Main Game Card -->
-                <div class="bg-white rounded-2xl shadow-xl border border-rose-100 p-8">
+                <div class="bg-white rounded-2xl shadow-xl border border-rose-100 p-4 md:p-8">
                     <!-- Grape Variety Display -->
-                    <div class="text-center mb-8">
-                        <div class="inline-flex items-center justify-center w-16 h-16 bg-rose-100 rounded-full mb-4">
-                            <i class="fas fa-wine-glass-alt text-2xl text-rose-600"></i>
-                        </div>
-                        <h2 class="grape-variety text-4xl font-bold text-gray-900 mb-2">${this.currentGrape.variety}</h2>
+                    <div class="text-center mb-6">
+                        <h2 class="grape-variety text-3xl md:text-4xl font-bold text-gray-900 mb-2">${this.currentGrape.variety}</h2>
                         <p class="text-gray-600">Which continent does this grape variety originate from?</p>
                     </div>
                     
@@ -203,10 +200,10 @@ class RunicVineApp {
                 </div>
 
                 <!-- Map Section (Initially Hidden) -->
-                <div class="map-section bg-white rounded-2xl shadow-xl border border-rose-100 p-8" style="display: none;">
-                    <div class="text-center mb-6">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Select the country:</h3>
-                        <p class="text-gray-600">Click on the country where this grape variety originates</p>
+                <div class="map-section bg-white rounded-2xl shadow-xl border border-rose-100 p-4 md:p-8" style="display: none;">
+                    <div class="text-center mb-4">
+                        <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-2">Select the country:</h3>
+                        <p class="text-sm md:text-base text-gray-600">Click on the country where this grape variety originates</p>
                     </div>
                     <div class="map-container">
                         <div id="map-placeholder" class="text-center text-gray-500 py-8">Select a continent first...</div>
@@ -335,11 +332,25 @@ class RunicVineApp {
                     e.target.classList.add('correct-continent');
                     this.continentCorrect = true;
                     
+                    // Hide entire continent selection section to save space
+                    setTimeout(() => {
+                        document.querySelector('.continent-selection').style.display = 'none';
+                    }, 800);
+                    
                     // Load the correct continent map for country selection
                     await this.loadContinentMap(selectedContinent);
                     
-                    // Show map section right below the selected continent button
-                    document.querySelector('.map-section').style.display = 'block';
+                    // Show map section and scroll it into view for mobile
+                    const mapSection = document.querySelector('.map-section');
+                    mapSection.style.display = 'block';
+                    
+                    // Scroll map into view on mobile after a brief delay
+                    setTimeout(() => {
+                        mapSection.scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'start' 
+                        });
+                    }, 900);
                     
                 } else {
                     e.target.classList.add('incorrect-continent');
@@ -415,6 +426,7 @@ class RunicVineApp {
                 
                 // Map clicked country names to grape data country names
                 const countryNameMap = {
+                    // Asia mappings
                     'Türkiye': 'Turkey',
                     'Hong_Kong': 'Hong Kong',
                     'Saudi_Arabia': 'Saudi Arabia',
@@ -423,7 +435,11 @@ class RunicVineApp {
                     'South_Korea': 'South Korea',
                     'Sri_Lanka': 'Sri Lanka',
                     'Timor_Leste': 'Timor-Leste',
-                    'Palestinian_Territories': 'Palestine'
+                    'Palestinian_Territories': 'Palestine',
+                    
+                    // Americas mappings
+                    'United_States_of_America': 'USA',
+                    'United_States': 'USA'
                 };
                 
                 const mappedCountry = countryNameMap[clickedCountry] || clickedCountry;
