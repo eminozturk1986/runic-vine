@@ -127,7 +127,7 @@ class RunicVineApp {
     selectRandomGrape() {
         // DEBUG MODE: Force Turkish grapes for testing
         const debugMode = true; // Set to false after testing
-        const turkishGrapes = ['Emir', 'Papazkarası', 'Keten Gömlek', 'Boğazkere', 'Narince'];
+        const turkishGrapes = ['Boğazkere', 'Emir', 'Kalecik Karası', 'Keten Gömlek', 'Narince', 'Papazkarası', 'Çalkarası', 'Öküzgözü'];
         
         if (debugMode) {
             // Find Turkish grapes that haven't been used yet
@@ -294,6 +294,9 @@ class RunicVineApp {
         };
         
         const result = continentMap[grape.country] || 'europe';
+        
+        // Extra debugging for ALL grapes to catch Turkish ones
+        console.log('🔍 GRAPE ANALYSIS:', grape.variety, '→', grape.country);
         
         // Extra debugging for Turkish grapes
         if (grape.country === 'Turkey') {
