@@ -125,7 +125,26 @@ class RunicVineApp {
     }
 
     selectRandomGrape() {
-        // Get available grapes (not yet used in this game)
+        // DEBUG MODE: Force Turkish grapes for testing
+        const debugMode = true; // Set to false after testing
+        const turkishGrapes = ['Emir', 'Papazkarası', 'Keten Gömlek', 'Boğazkere', 'Narince'];
+        
+        if (debugMode) {
+            // Find Turkish grapes that haven't been used yet
+            const availableTurkishGrapes = this.grapeData.filter(grape => 
+                turkishGrapes.includes(grape.variety) && !this.usedGrapes.has(grape.variety)
+            );
+            
+            if (availableTurkishGrapes.length > 0) {
+                const randomIndex = Math.floor(Math.random() * availableTurkishGrapes.length);
+                this.currentGrape = availableTurkishGrapes[randomIndex];
+                this.usedGrapes.add(this.currentGrape.variety);
+                console.log(`🧪 DEBUG: Selected Turkish grape: ${this.currentGrape.variety}`);
+                return;
+            }
+        }
+        
+        // Normal random selection
         const availableGrapes = this.grapeData.filter(grape => 
             !this.usedGrapes.has(grape.variety)
         );
@@ -274,7 +293,18 @@ class RunicVineApp {
             'Egypt': 'africa'
         };
         
-        return continentMap[grape.country] || 'europe'; // Default to Europe
+        const result = continentMap[grape.country] || 'europe';
+        
+        // Extra debugging for Turkish grapes
+        if (grape.country === 'Turkey') {
+            console.log('🇹🇷 TURKISH GRAPE DEBUG:');
+            console.log('- Variety:', grape.variety);
+            console.log('- Country:', grape.country);
+            console.log('- Mapped continent:', result);
+            console.log('- Turkey in map?', continentMap.hasOwnProperty('Turkey'));
+        }
+        
+        return result;
     }
 
     async loadContinentMap(continent) {
