@@ -48,6 +48,7 @@ class RunicVineApp {
             'Bosnia and Herzegovina': 'europe',
             'Bulgaria': 'europe',
             'Croatia': 'europe',
+            'Czech Republic': 'europe',
             'France': 'europe',
             'Germany': 'europe', 
             'Greece': 'europe',
@@ -58,6 +59,7 @@ class RunicVineApp {
             'Portugal': 'europe',
             'Romania': 'europe',
             'Serbia': 'europe',
+            'Slovenia': 'europe',
             'Spain': 'europe',
             'Switzerland': 'europe',
             
@@ -361,6 +363,7 @@ class RunicVineApp {
             'Bosnia and Herzegovina': 'europe',
             'Bulgaria': 'europe',
             'Croatia': 'europe',
+            'Czech Republic': 'europe',
             'France': 'europe',
             'Germany': 'europe', 
             'Greece': 'europe',
@@ -371,6 +374,7 @@ class RunicVineApp {
             'Portugal': 'europe',
             'Romania': 'europe',
             'Serbia': 'europe',
+            'Slovenia': 'europe',
             'Spain': 'europe',
             'Switzerland': 'europe',
             
