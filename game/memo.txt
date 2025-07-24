@@ -1,69 +1,77 @@
 RUNIC VINE - WINE GEOGRAPHY GAME
 =====================================
+Last Updated: 2025-07-24 (GitHub sync)
 
 GAME OVERVIEW:
 - 2-minute quiz matching grape varieties to their countries of origin
-- Two-step difficulty: continent selection first, then country selection
-- 202 grape varieties from CSV database
-- Mobile-optimized interface
+- Interactive European map gameplay (simplified from two-step approach)
+- 100+ grape varieties from JSON database  
+- Fully responsive design for desktop and mobile
 
 CURRENT STATUS:
-✅ COMPLETED FEATURES:
-- Europe SVG map cropped to wine regions (viewBox: 172.21 319.83 689.11 439.77)
-- UK and Serbia made selectable on map
-- Small countries (Vatican, Liechtenstein, Luxembourg, Andorra, San Marino) removed
-- Database updated with 202 grape varieties from CSV
-- Grape color icons removed from UI
-- Two-step continent → country selection implemented
-- Bug fixes: continent buttons reset properly, no repeated questions, game flow improvements
-- Mobile optimization: compact header, one-line stats, space-saving continent selection
+✅ COMPLETED FEATURES (GitHub Production Version):
+- Interactive Europe SVG map with 14 selectable countries
+- Player registration system (name + email)
+- 2-minute timer with visual countdown
+- Real-time scoring and immediate feedback
+- Persistent leaderboard (localStorage) with top 10 rankings
+- Complete responsive design (mobile-first approach)
+- Comprehensive Puppeteer test suite
+- Production-ready deployment
 
-🎯 KEY TECHNICAL IMPLEMENTATIONS:
-- Set data structure for tracking used questions (no repeats)
-- Continent mapping for all countries in database
-- Mobile-responsive design with touch optimization
-- Proper game state management and reset functionality
+🎯 CURRENT TECH STACK & ARCHITECTURE:
+- Vanilla JavaScript (no frameworks)
+- HTML5 + CSS3 (Grid/Flexbox layouts)
+- SVG interactive maps
+- localStorage for data persistence
+- Puppeteer for automated testing
+- Serve package for local development
 
-📂 IMPORTANT FILES:
-- src/main.js: Main game logic and state management
-- styles/styles.css: All styling including mobile optimizations
-- data/grape_data.json: 202 grape varieties database (converted from CSV)
-- public/maps/europe-detailed.svg: Cropped Europe map
-- index.html: Basic HTML structure
+📂 PROJECT STRUCTURE (GitHub Version):
+- index.html: Main entry point
+- src/main.js: Core game logic (~500+ lines)
+- styles/styles.css: Wine-themed responsive styling
+- data/grape_data.json: 100+ grape varieties database
+- public/maps/europe-detailed.svg: Interactive Europe map
+- test/ui.test.js: Complete Puppeteer test suite
+- pictures/: Game assets and branding
+- package.json: Dependencies and scripts
 
-🐛 KNOWN BUGS FIXED:
-- Continent buttons stuck after first question → Fixed with resetContinentSelection()
-- Same questions repeating → Fixed with usedGrapes Set
-- Game stuck when continent wrong → Fixed with immediate next question
-- Mobile layout issues → Fixed with responsive design
+⚙️ CURRENT GAME FLOW (Simplified):
+1. Start screen: Player registration (name + email)
+2. Game screen: Show grape variety → click country on map
+3. Immediate feedback: Correct/incorrect with visual indicators
+4. Auto-progression: Next question loads automatically
+5. Timer: 2-minute countdown with visual progress
+6. End screen: Final score + leaderboard with rankings
 
-⚙️ GAME FLOW:
-1. Player enters name/email
-2. Game shows grape variety
-3. Player selects continent (other buttons hide to save space)
-4. If continent correct: map loads for country selection
-5. If continent wrong: immediate next question with feedback
-6. Country selection completes the question
-7. Process repeats for 2 minutes
-8. End screen shows score and leaderboard
+🎮 FEATURES & MECHANICS:
+- 14 European countries: France, Germany, Italy, Spain, Portugal, Greece, Austria, Switzerland, Hungary, Romania, Bulgaria, Croatia, Slovenia, Czech Republic
+- Scoring: +1 per correct answer, accuracy percentage calculated
+- Leaderboard: Top 10 with medals for top 3 positions
+- Visual feedback: Country highlights, success/error messages
+- Responsive: Works on mobile phones, tablets, desktop
 
-🎮 CONTROLS:
-- Touch-optimized for mobile
-- Keyboard accessibility support
-- Proper hover/focus states
-- Responsive button sizing
+💾 DATA & STORAGE:
+- grape_data.json: Simple array format with variety/country pairs
+- localStorage: Persistent leaderboard data
+- No backend required: Pure client-side application
 
-💾 DATA STRUCTURE:
-- JSON format: {"variety": "grape_name", "country": "origin_country"}
-- Continent mapping covers Europe, Asia, Africa, Americas, Oceania
-- LocalStorage for leaderboard persistence
+🔧 DEPLOYMENT STATUS:
+✅ GitHub Pages ready
+✅ Cross-browser compatible (Chrome 70+, Firefox 65+, Safari 12+, Edge 79+)
+✅ Mobile responsive (320px+ screen sizes)
+✅ Production optimized
 
-🔧 NEXT DEVELOPMENT IDEAS:
-- Add more continents/maps
-- Implement difficulty levels
-- Add sound effects
-- Export scores feature
-- Multiplayer mode
-- Wine region specificity (sub-regions)
+🚀 POTENTIAL ENHANCEMENTS:
+- Expand to other continents (maps already exist: africa.svg, asia.svg, etc.)
+- Add difficulty levels
+- Implement wine region specificity
+- Sound effects and animations
+- Export/share scores functionality
+- Multiplayer competitive mode
 
-REMEMBER: Game is fully functional and mobile-optimized. All major bugs resolved.
+⏰ MEMORY CHECKPOINT - Next update needed at: 2025-07-24 (in 1 hour)
+📍 Current session context: Full GitHub project analysis completed, local WSL environment confirmed
+
+REMEMBER: Project is COMPLETE and production-ready. Focus on enhancements or maintenance only.

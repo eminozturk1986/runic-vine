@@ -49,30 +49,48 @@ class RunicVineApp {
 
     renderStartScreen() {
         this.gameContainer.innerHTML = `
-            <div class="start-screen">
-                <h2>Welcome to Runic Vine</h2>
-                <p>Test your knowledge of grape varieties and their countries of origin!</p>
-                
-                <form id="player-form">
-                    <div class="form-group">
-                        <label for="player-name">Your Name</label>
-                        <input type="text" id="player-name" class="form-input" placeholder="Enter your name" required>
+            <div class="max-w-md w-full mx-auto">
+                <div class="bg-white rounded-2xl shadow-xl border border-rose-100 p-8">
+                    <div class="text-center mb-8">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-2">Welcome to Runic Vine</h2>
+                        <p class="text-gray-600 leading-relaxed">Test your knowledge of grape varieties and their countries of origin!</p>
                     </div>
                     
-                    <div class="form-group">
-                        <label for="player-email">Email Address</label>
-                        <input type="email" id="player-email" class="form-input" placeholder="Enter your email" required>
-                    </div>
+                    <form id="player-form" class="space-y-6">
+                        <div>
+                            <label for="player-name" class="block text-sm font-medium text-gray-700 mb-2">Your Name</label>
+                            <input type="text" id="player-name" 
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-rose-500 focus:border-rose-500 transition-colors duration-200" 
+                                placeholder="Enter your name" required>
+                        </div>
+                        
+                        <div>
+                            <label for="player-email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                            <input type="email" id="player-email" 
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-rose-500 focus:border-rose-500 transition-colors duration-200" 
+                                placeholder="Enter your email" required>
+                        </div>
+                        
+                        <div class="space-y-3 pt-4">
+                            <button type="submit" 
+                                class="w-full bg-rose-600 hover:bg-rose-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 hover:shadow-lg">
+                                Start Game
+                            </button>
+                            <button type="button" 
+                                class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105" 
+                                onclick="app.showLeaderboard()">
+                                View Rankings
+                            </button>
+                        </div>
+                    </form>
                     
-                    <div class="button-group">
-                        <button type="submit" class="btn">Start Game</button>
-                        <button type="button" class="btn btn-secondary" onclick="app.showLeaderboard()">View Rankings</button>
+                    <div class="text-center mt-6 pt-6 border-t border-gray-100">
+                        <p class="text-sm text-gray-500">
+                            <i class="fas fa-wine-glass-alt text-rose-500 mr-2"></i>
+                            ${this.grapeData.length} grape varieties loaded and ready
+                        </p>
                     </div>
-                </form>
-                
-                <p style="margin-top: 2rem; color: var(--primary-blue-gray); opacity: 0.7; font-size: 0.9rem;">
-                    ${this.grapeData.length} grape varieties loaded and ready
-                </p>
+                </div>
             </div>
         `;
 
@@ -131,31 +149,67 @@ class RunicVineApp {
 
     async renderGameScreen() {
         this.gameContainer.innerHTML = `
-            <div class="game-screen">
-                <div class="game-header">
-                    <span class="stat">Score: <strong id="score-display">${this.score}</strong></span>
-                    <span class="stat">Time: <strong id="timer-display">2:00</strong></span>
-                    <span class="stat">Questions: <strong id="questions-display">${this.totalQuestions}</strong></span>
-                </div>
-
-                <div class="map-section" style="display: none;">
-                    <h3 class="map-title">Select the country:</h3>
-                    <div class="map-container">
-                        <div id="map-placeholder">Select a continent first...</div>
+            <div class="max-w-4xl w-full mx-auto space-y-6">
+                <!-- Stats Header -->
+                <div class="bg-white rounded-xl shadow-lg border border-rose-100 p-4">
+                    <div class="flex justify-between items-center text-sm md:text-base">
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <span>Score: <strong id="score-display" class="text-rose-600">${this.score}</strong></span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-clock text-blue-500"></i>
+                            <span>Time: <strong id="timer-display" class="text-blue-600">2:00</strong></span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-question-circle text-green-500"></i>
+                            <span>Questions: <strong id="questions-display" class="text-green-600">${this.totalQuestions}</strong></span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="question-section">
-                    <div class="grape-variety">${this.currentGrape.variety}</div>
+                <!-- Main Game Card -->
+                <div class="bg-white rounded-2xl shadow-xl border border-rose-100 p-8">
+                    <!-- Grape Variety Display -->
+                    <div class="text-center mb-8">
+                        <div class="inline-flex items-center justify-center w-16 h-16 bg-rose-100 rounded-full mb-4">
+                            <i class="fas fa-wine-glass-alt text-2xl text-rose-600"></i>
+                        </div>
+                        <h2 class="text-4xl font-bold text-gray-900 mb-2">${this.currentGrape.variety}</h2>
+                        <p class="text-gray-600">Which continent does this grape variety originate from?</p>
+                    </div>
+                    
+                    <!-- Continent Selection -->
+                    <div class="continent-selection">
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <button class="continent-btn bg-gradient-to-br from-blue-50 to-blue-100 hover:from-blue-100 hover:to-blue-200 border-2 border-blue-200 hover:border-blue-300 text-blue-800 font-semibold py-4 px-6 rounded-xl transition-all duration-200 transform hover:scale-105 hover:shadow-lg flex flex-col items-center space-y-2" data-continent="europe">
+                                <i class="fas fa-monument text-2xl"></i>
+                                <span>Europe</span>
+                            </button>
+                            <button class="continent-btn bg-gradient-to-br from-yellow-50 to-yellow-100 hover:from-yellow-100 hover:to-yellow-200 border-2 border-yellow-200 hover:border-yellow-300 text-yellow-800 font-semibold py-4 px-6 rounded-xl transition-all duration-200 transform hover:scale-105 hover:shadow-lg flex flex-col items-center space-y-2" data-continent="asia">
+                                <i class="fas fa-torii-gate text-2xl"></i>
+                                <span>Asia</span>
+                            </button>
+                            <button class="continent-btn bg-gradient-to-br from-orange-50 to-orange-100 hover:from-orange-100 hover:to-orange-200 border-2 border-orange-200 hover:border-orange-300 text-orange-800 font-semibold py-4 px-6 rounded-xl transition-all duration-200 transform hover:scale-105 hover:shadow-lg flex flex-col items-center space-y-2" data-continent="africa">
+                                <i class="fas fa-tree text-2xl"></i>
+                                <span>Africa</span>
+                            </button>
+                            <button class="continent-btn bg-gradient-to-br from-green-50 to-green-100 hover:from-green-100 hover:to-green-200 border-2 border-green-200 hover:border-green-300 text-green-800 font-semibold py-4 px-6 rounded-xl transition-all duration-200 transform hover:scale-105 hover:shadow-lg flex flex-col items-center space-y-2" data-continent="south-america">
+                                <i class="fas fa-mountain text-2xl"></i>
+                                <span>Americas</span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="continent-selection">
-                    <h3 class="selection-title">Select continent:</h3>
-                    <div class="continent-buttons">
-                        <button class="continent-btn" data-continent="europe">Europe</button>
-                        <button class="continent-btn" data-continent="asia">Asia</button>
-                        <button class="continent-btn" data-continent="africa">Africa</button>
-                        <button class="continent-btn" data-continent="south-america">Americas</button>
+
+                <!-- Map Section (Initially Hidden) -->
+                <div class="map-section bg-white rounded-2xl shadow-xl border border-rose-100 p-8" style="display: none;">
+                    <div class="text-center mb-6">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Select the country:</h3>
+                        <p class="text-gray-600">Click on the country where this grape variety originates</p>
+                    </div>
+                    <div class="map-container">
+                        <div id="map-placeholder" class="text-center text-gray-500 py-8">Select a continent first...</div>
                     </div>
                 </div>
             </div>
@@ -545,37 +599,53 @@ class RunicVineApp {
         this.saveScore();
         
         this.gameContainer.innerHTML = `
-            <div class="end-screen">
-                <div class="final-score-section">
-                    <h2>Time's Up!</h2>
-                    <div class="player-name">Well done, ${this.playerData.name}!</div>
+            <div class="max-w-4xl w-full mx-auto space-y-6">
+                <!-- Final Score Card -->
+                <div class="bg-white rounded-2xl shadow-xl border border-rose-100 p-8 text-center">
+                    <div class="mb-6">
+                        <div class="inline-flex items-center justify-center w-20 h-20 bg-rose-100 rounded-full mb-4">
+                            <i class="fas fa-trophy text-3xl text-rose-600"></i>
+                        </div>
+                        <h2 class="text-3xl font-bold text-gray-900 mb-2">Time's Up!</h2>
+                        <p class="text-xl text-gray-700">Well done, <span class="font-semibold text-rose-600">${this.playerData.name}</span>!</p>
+                    </div>
                     
-                    <div class="score-summary">
-                        <div class="score-metric">
-                            <span class="score-metric-value">${this.score}</span>
-                            <div class="score-metric-label">Correct Answers</div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-gradient-to-br from-rose-50 to-rose-100 rounded-xl p-6 border border-rose-200">
+                            <div class="text-3xl font-bold text-rose-600 mb-2">${this.score}</div>
+                            <div class="text-sm font-medium text-rose-800">Correct Answers</div>
                         </div>
-                        <div class="score-metric">
-                            <span class="score-metric-value">${this.totalQuestions}</span>
-                            <div class="score-metric-label">Total Questions</div>
+                        <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6 border border-blue-200">
+                            <div class="text-3xl font-bold text-blue-600 mb-2">${this.totalQuestions}</div>
+                            <div class="text-sm font-medium text-blue-800">Total Questions</div>
                         </div>
-                        <div class="score-metric">
-                            <span class="score-metric-value">${percentage}%</span>
-                            <div class="score-metric-label">Accuracy</div>
+                        <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6 border border-green-200">
+                            <div class="text-3xl font-bold text-green-600 mb-2">${percentage}%</div>
+                            <div class="text-sm font-medium text-green-800">Accuracy</div>
                         </div>
+                    </div>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button class="bg-rose-600 hover:bg-rose-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 hover:shadow-lg" onclick="app.startNewGame()">
+                            <i class="fas fa-redo mr-2"></i>Play Again
+                        </button>
+                        <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105" onclick="app.renderStartScreen()">
+                            <i class="fas fa-user-plus mr-2"></i>New Player
+                        </button>
                     </div>
                 </div>
                 
-                <div class="leaderboard-section">
-                    <h3 class="leaderboard-title">🏆 Top Scores</h3>
+                <!-- Leaderboard Card -->
+                <div class="bg-white rounded-2xl shadow-xl border border-rose-100 p-8">
+                    <div class="text-center mb-6">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">
+                            <i class="fas fa-trophy text-yellow-500 mr-2"></i>Top Scores
+                        </h3>
+                        <p class="text-gray-600">See how you rank against other players</p>
+                    </div>
                     <div id="leaderboard-container">
                         ${this.renderLeaderboard()}
                     </div>
-                </div>
-                
-                <div class="game-buttons">
-                    <button class="btn" onclick="app.startNewGame()">Play Again</button>
-                    <button class="btn btn-secondary" onclick="app.renderStartScreen()">New Player</button>
                 </div>
             </div>
         `;
@@ -637,58 +707,61 @@ class RunicVineApp {
             }
         } catch (error) {
             console.error('Error loading scores for leaderboard:', error);
-            return '<div class="no-scores">Unable to load leaderboard</div>';
+            return '<div class="text-center text-gray-500 py-8">Unable to load leaderboard</div>';
         }
         
         if (scores.length === 0) {
-            return '<div class="no-scores">No scores yet. Be the first to play!</div>';
+            return '<div class="text-center text-gray-500 py-8">No scores yet. Be the first to play!</div>';
         }
         
         // Get top 10 scores
         const topScores = scores.slice(0, 10);
         const currentPlayerTimestamp = Date.now();
         
-        let tableHTML = `
-            <table class="leaderboard-table">
-                <thead>
-                    <tr>
-                        <th>Rank</th>
-                        <th>Player</th>
-                        <th>Score</th>
-                        <th>Accuracy</th>
-                        <th>Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-        `;
+        let leaderboardHTML = '<div class="space-y-3">';
         
         topScores.forEach((scoreData, index) => {
             const rank = index + 1;
             const isCurrentPlayer = Math.abs(scoreData.timestamp - currentPlayerTimestamp) < 5000; // Within 5 seconds
-            const rowClass = isCurrentPlayer ? 'current-player-row' : '';
+            const highlightClass = isCurrentPlayer ? 'ring-2 ring-rose-500 bg-rose-50' : 'bg-gray-50';
             
             let rankDisplay = rank;
-            if (rank === 1) rankDisplay = '<span class="rank-medal rank-1">🥇</span>';
-            else if (rank === 2) rankDisplay = '<span class="rank-medal rank-2">🥈</span>';
-            else if (rank === 3) rankDisplay = '<span class="rank-medal rank-3">🥉</span>';
+            let rankIcon = '';
+            if (rank === 1) {
+                rankDisplay = '1st';
+                rankIcon = '<i class="fas fa-trophy text-yellow-500 text-lg"></i>';
+            } else if (rank === 2) {
+                rankDisplay = '2nd';
+                rankIcon = '<i class="fas fa-medal text-gray-400 text-lg"></i>';
+            } else if (rank === 3) {
+                rankDisplay = '3rd';
+                rankIcon = '<i class="fas fa-award text-amber-600 text-lg"></i>';
+            } else {
+                rankIcon = `<span class="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center text-sm font-semibold text-gray-600">${rank}</span>`;
+            }
             
-            tableHTML += `
-                <tr class="${rowClass}">
-                    <td>${rankDisplay}</td>
-                    <td>${this.escapeHtml(scoreData.name)}</td>
-                    <td>${scoreData.score}/${scoreData.totalQuestions}</td>
-                    <td>${scoreData.accuracy}%</td>
-                    <td>${scoreData.date}</td>
-                </tr>
+            leaderboardHTML += `
+                <div class="flex items-center justify-between p-4 rounded-xl border border-gray-200 ${highlightClass} transition-all duration-200">
+                    <div class="flex items-center space-x-4">
+                        <div class="flex items-center justify-center w-8">
+                            ${rankIcon}
+                        </div>
+                        <div>
+                            <div class="font-semibold text-gray-900">${this.escapeHtml(scoreData.name)}</div>
+                            <div class="text-sm text-gray-500">${scoreData.date}</div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="font-bold text-gray-900">${scoreData.score}/${scoreData.totalQuestions}</div>
+                        <div class="text-sm font-medium text-gray-600">${scoreData.accuracy}% accuracy</div>
+                    </div>
+                </div>
             `;
         });
         
-        tableHTML += `
-                </tbody>
-            </table>
-        `;
+        leaderboardHTML += '</div>';
         
-        return tableHTML;
+        return leaderboardHTML;
     }
 
     escapeHtml(text) {
@@ -737,13 +810,25 @@ class RunicVineApp {
     
     showLeaderboard() {
         this.gameContainer.innerHTML = `
-            <div class="leaderboard-screen">
-                <h2>🏆 Top Rankings</h2>
-                <div class="leaderboard-container">
-                    ${this.renderLeaderboard()}
-                </div>
-                <div class="button-group">
-                    <button class="btn" onclick="app.renderStartScreen()">Back to Main</button>
+            <div class="max-w-2xl w-full mx-auto">
+                <div class="bg-white rounded-2xl shadow-xl border border-rose-100 p-8">
+                    <div class="text-center mb-8">
+                        <div class="inline-flex items-center justify-center w-16 h-16 bg-yellow-100 rounded-full mb-4">
+                            <i class="fas fa-trophy text-2xl text-yellow-600"></i>
+                        </div>
+                        <h2 class="text-3xl font-bold text-gray-900 mb-2">Top Rankings</h2>
+                        <p class="text-gray-600">See how you rank against other players</p>
+                    </div>
+                    
+                    <div class="mb-8">
+                        ${this.renderLeaderboard()}
+                    </div>
+                    
+                    <div class="text-center">
+                        <button class="bg-rose-600 hover:bg-rose-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 hover:shadow-lg" onclick="app.renderStartScreen()">
+                            <i class="fas fa-arrow-left mr-2"></i>Back to Main
+                        </button>
+                    </div>
                 </div>
             </div>
         `;
@@ -751,9 +836,17 @@ class RunicVineApp {
 
     renderError() {
         this.gameContainer.innerHTML = `
-            <div style="text-align: center; color: var(--primary-red);">
-                <h2>Error Loading Game</h2>
-                <p>Unable to load game data. Please refresh the page.</p>
+            <div class="max-w-md w-full mx-auto">
+                <div class="bg-white rounded-2xl shadow-xl border border-red-200 p-8 text-center">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-4">
+                        <i class="fas fa-exclamation-triangle text-2xl text-red-600"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-2">Error Loading Game</h2>
+                    <p class="text-gray-600 mb-6">Unable to load game data. Please refresh the page.</p>
+                    <button class="bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200" onclick="window.location.reload()">
+                        <i class="fas fa-refresh mr-2"></i>Refresh Page
+                    </button>
+                </div>
             </div>
         `;
     }

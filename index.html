@@ -4,31 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Runic Vine</title>
-    <link rel="stylesheet" href="styles/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="styles/styles.css">
 </head>
-<body>
+<body class="font-poppins bg-gradient-to-br from-rose-50 to-white min-h-screen">
     <div id="app">
-        <header>
-            <div class="header-content">
-                <div class="logo-section">
-                    <img src="pictures/logo.jpeg" alt="Runic Grapes Logo" class="main-logo" onclick="app.goToMainPage()">
-                    <p class="motto">Wine, beyond the glass</p>
+        <!-- Header -->
+        <header class="bg-white/80 backdrop-blur-sm shadow-sm border-b border-rose-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <div class="flex items-center space-x-4 cursor-pointer" onclick="app.goToMainPage()">
+                        <img src="pictures/logo.jpeg" alt="Runic Grapes Logo" class="h-10 w-10 rounded-full shadow-md hover:shadow-lg transition-shadow duration-200">
+                        <div>
+                            <h1 class="text-xl font-semibold text-gray-900">Runic Vine</h1>
+                            <p class="text-sm text-rose-600 font-medium">Wine, beyond the glass</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </header>
         
-        <main id="game-container">
+        <!-- Main Game Container -->
+        <main id="game-container" class="min-h-screen flex items-center justify-center p-4">
             <!-- Game will mount here -->
         </main>
-        
-        <div class="background-elements">
-            <div class="wine-stain wine-stain-1"></div>
-            <div class="wine-stain wine-stain-2"></div>
-            <div class="wine-stain wine-stain-3"></div>
-        </div>
     </div>
     
     <script src="src/main.js"></script>
