@@ -147,6 +147,27 @@ class RunicVineApp {
         console.log(`Selected grape: ${this.currentGrape.variety} (${this.usedGrapes.size}/${this.grapeData.length} used)`);
     }
 
+    getMapIdForCountry(countryName) {
+        // Reverse mapping: grape data country name -> map ID
+        const reverseCountryMap = {
+            // Asia reverse mappings
+            'Turkey': 'Türkiye',
+            'Hong Kong': 'Hong_Kong',
+            'Saudi Arabia': 'Saudi_Arabia',
+            'UAE': 'United_Arab_Emirates',
+            'North Korea': 'North_Korea',
+            'South Korea': 'South_Korea',
+            'Sri Lanka': 'Sri_Lanka',
+            'Timor-Leste': 'Timor_Leste',
+            'Palestine': 'Palestinian_Territories',
+            
+            // Americas reverse mappings
+            'USA': 'United_States_of_America'
+        };
+        
+        return reverseCountryMap[countryName] || countryName;
+    }
+
     async renderGameScreen() {
         this.gameContainer.innerHTML = `
             <div class="max-w-4xl w-full mx-auto space-y-6">
@@ -493,6 +514,12 @@ class RunicVineApp {
     checkAnswer(countryElement) {
         const countryCorrect = this.selectedCountry === this.currentGrape.country;
         
+        console.log('=== ANSWER CHECK DEBUG ===');
+        console.log('Selected country:', this.selectedCountry);
+        console.log('Correct answer:', this.currentGrape.country);
+        console.log('Countries match:', countryCorrect);
+        console.log('========================');
+        
         // Clear any existing feedback classes and styles
         document.querySelectorAll('.country').forEach(c => {
             c.classList.remove('correct', 'incorrect', 'selected');
@@ -507,8 +534,13 @@ class RunicVineApp {
         } else {
             // Wrong country (but continent was correct)
             countryElement.classList.add('incorrect');
-            // Highlight the correct country
-            const correctCountry = document.getElementById(this.currentGrape.country);
+            
+            // Need to find the correct country on the map using reverse mapping
+            const correctCountryMapId = this.getMapIdForCountry(this.currentGrape.country);
+            const correctCountry = document.getElementById(correctCountryMapId);
+            console.log('Looking for correct country map ID:', correctCountryMapId);
+            console.log('Found correct country element:', !!correctCountry);
+            
             if (correctCountry) {
                 correctCountry.classList.add('correct');
             }
@@ -571,6 +603,17 @@ class RunicVineApp {
         
         this.selectedCountry = null;
         this.continentCorrect = false;
+        
+        // Scroll back to grape variety for mobile
+        setTimeout(() => {
+            const grapeVarietyElement = document.querySelector('.grape-variety');
+            if (grapeVarietyElement) {
+                grapeVarietyElement.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'center' 
+                });
+            }
+        }, 100);
     }
 
     startTimer() {
