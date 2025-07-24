@@ -413,16 +413,31 @@ class RunicVineApp {
                 const validCountries = [...new Set(this.grapeData.map(grape => grape.country))];
                 const clickedCountry = e.target.id;
                 
+                // Map clicked country names to grape data country names
+                const countryNameMap = {
+                    'Türkiye': 'Turkey',
+                    'Hong_Kong': 'Hong Kong',
+                    'Saudi_Arabia': 'Saudi Arabia',
+                    'United_Arab_Emirates': 'UAE',
+                    'North_Korea': 'North Korea',
+                    'South_Korea': 'South Korea',
+                    'Sri_Lanka': 'Sri Lanka',
+                    'Timor_Leste': 'Timor-Leste',
+                    'Palestinian_Territories': 'Palestine'
+                };
+                
+                const mappedCountry = countryNameMap[clickedCountry] || clickedCountry;
+                
                 // Only accept clicks on countries that exist in our grape database
-                if (!validCountries.includes(clickedCountry)) {
-                    console.log('Invalid country clicked:', clickedCountry);
+                if (!validCountries.includes(mappedCountry)) {
+                    console.log('Invalid country clicked:', clickedCountry, '(mapped to:', mappedCountry, ')');
                     return; // Ignore clicks on small/invalid countries
                 }
                 
-                this.selectedCountry = clickedCountry;
+                this.selectedCountry = mappedCountry;
                 this.totalQuestions++;
                 
-                console.log('Country selected:', this.selectedCountry);
+                console.log('Country selected:', this.selectedCountry, '(clicked:', clickedCountry, ')');
                 console.log('Correct answer:', this.currentGrape.country);
                 
                 this.checkAnswer(e.target);
