@@ -481,7 +481,14 @@ class RunicVineApp {
             button.addEventListener('click', async (e) => {
                 if (this.gameState !== 'playing') return;
                 
-                const selectedContinent = e.target.dataset.continent;
+                // Handle clicks on button or its child elements (icon/span)
+                const button = e.target.closest('.continent-btn');
+                const selectedContinent = button ? button.dataset.continent : null;
+                
+                if (!selectedContinent) {
+                    console.warn('No continent selected - button click failed');
+                    return;
+                }
                 const correctContinent = this.getGrapeContinent(this.currentGrape);
                 
                 console.log('=== CONTINENT DEBUG ===');
