@@ -336,7 +336,13 @@ class RunicVineApp {
                 const selectedContinent = e.target.dataset.continent;
                 const correctContinent = this.getGrapeContinent(this.currentGrape);
                 
-                console.log(`Selected continent: ${selectedContinent}, Correct: ${correctContinent}`);
+                console.log('=== CONTINENT DEBUG ===');
+                console.log('Grape variety:', this.currentGrape.variety);
+                console.log('Grape country:', this.currentGrape.country);
+                console.log('Selected continent:', selectedContinent);
+                console.log('Correct continent:', correctContinent);
+                console.log('Continents match:', selectedContinent === correctContinent);
+                console.log('=======================');
                 
                 // Hide other continent buttons to save space
                 buttons.forEach(btn => {
